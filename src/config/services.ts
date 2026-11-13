@@ -128,7 +128,7 @@ export const services: Service[] = [
     media: [
       {
         image: {
-          file: 'pg/DisseñoGeminis.png',
+          file: 'pg/DissenoGeminis.png',
           width: 1024,
           height: 1024,
           alt: {
@@ -141,7 +141,7 @@ export const services: Service[] = [
       },
       {
         image: {
-          file: 'pg/DisseñoNavidad.png',
+          file: 'pg/DissenoNavidad.png',
           width: 4789,
           height: 7000,
           alt: {
