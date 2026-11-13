@@ -1,0 +1,115 @@
+/* ──────────────────────────────────────────────────────────────────
+   DESIGN TOKENS — single source of truth for the visual language.
+   ────────────────────────────────────────────────────────────────── */
+:root {
+  /* Brand palette */
+  --green: #05d991;        /* accent: interaction, highlights, CTA */
+  --deep: #00231f;         /* dark / technical environments */
+  --paper: #e8e8e8;        /* light / editorial surfaces */
+  --ink: #000;             /* type & structure */
+  --white: #fff;
+
+  /* Derived (never new hues — tints of the brand) */
+  --deep-2: #013a33;
+  --deep-line: rgb(5 217 145 / 0.18);
+  --paper-line: rgb(0 0 0 / 0.16);
+  --paper-muted: #4a4a4a;  /* 7.4:1 on paper */
+  --deep-muted: #9fb8b2;   /* 7.9:1 on deep */
+
+  /* Typography */
+  --font-display: 'Neue Montreal', 'Neue Montreal Fallback', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui: 'DM Sans', 'DM Sans Fallback', system-ui, -apple-system, sans-serif;
+
+  /* Fluid type scale (min @ 360px → max @ 1600px) */
+  --fs-mega: clamp(3.25rem, 1.6rem + 7.4vw, 10.5rem);
+  --fs-xxl: clamp(2.6rem, 1.4rem + 5.4vw, 7.5rem);
+  --fs-xl: clamp(2rem, 1.3rem + 3.2vw, 4.75rem);
+  --fs-l: clamp(1.5rem, 1.15rem + 1.6vw, 2.75rem);
+  --fs-m: clamp(1.125rem, 1rem + 0.55vw, 1.5rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --fs-s: 0.875rem;
+  --fs-xs: 0.75rem;
+  --fs-micro: 0.6875rem;
+
+  --lh-tight: 0.92;
+  --lh-snug: 1.15;
+  --lh-body: 1.55;
+  --track-label: 0.12em;
+  --track-display: -0.035em;
+
+  /* Spacing (4px base) */
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
+  --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4rem;
+  --s-9: 6rem; --s-10: 8rem; --s-11: 12rem;
+  --section-y: clamp(5rem, 3rem + 9vw, 12rem);
+
+  /* Grid */
+  --cols: 12;
+  --gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
+  --margin: clamp(1rem, 0.4rem + 2.8vw, 3.5rem);
+  --max: 1680px;
+
+  /* Borders — hairlines only, no shadows, no large radii */
+  --hair: 1px;
+  --radius: 0;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-step: steps(6, end);
+  --t-fast: 180ms;
+  --t-base: 360ms;
+  --t-slow: 720ms;
+
+  /* Layers */
+  --z-canvas: 0;
+  --z-content: 1;
+  --z-header: 50;
+  --z-menu: 60;
+  --z-preloader: 100;
+
+  --header-h: 4.25rem;
+
+  /* Breakpoints (reference — used in @media queries)
+     sm 480px · md 768px · lg 1024px · xl 1280px · 2xl 1600px */
+}
+
+/* Tone system: every section declares data-tone and the
+   semantic tokens below flip automatically. */
+[data-tone='light'] {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --muted: var(--paper-muted);
+  --line: var(--paper-line);
+  --accent-fill: var(--green);  /* fills behind black text: 11.6:1 */
+  --accent-ink: var(--ink);     /* green text fails on paper → use ink */
+  --focus: var(--ink);
+  --logo-ink: var(--deep);   /* original logo colours */
+  --logo-knock: var(--white);
+  color-scheme: light;
+}
+[data-tone='dark'] {
+  --bg: var(--deep);
+  --fg: var(--paper);
+  --muted: var(--deep-muted);
+  --line: var(--deep-line);
+  --accent-fill: var(--green);
+  --accent-ink: var(--green);   /* 8.6:1 on deep */
+  --focus: var(--green);
+  --logo-ink: var(--paper);  /* inverted for dark surfaces */
+  --logo-knock: var(--deep);
+  color-scheme: dark;
+}
+[data-tone='black'] {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --muted: #a3a3a3;
+  --line: rgb(232 232 232 / 0.14);
+  --accent-fill: var(--green);
+  --accent-ink: var(--green);
+  --focus: var(--green);
+  --logo-ink: var(--paper);
+  --logo-knock: var(--ink);
+  color-scheme: dark;
+}

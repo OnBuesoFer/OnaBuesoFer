@@ -1,0 +1,79 @@
+/* ──────────────────────────────────────────────────────────────────
+   FONTS — served straight from src/media/tipografia/ (originals are
+   never modified; one copy of each duplicate file is referenced).
+   Neue Montreal: Pangram Pangram — confirm web-embedding licence.
+   DM Sans: 400/500 + italic come from the official OFL variable font
+   in DM SANS/OFL-regular-medium/; other weights use the supplied files.
+   ────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('../media/tipografia/NEUE MONTREAL/Neue Montreal Light 300.otf') format('opentype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('../media/tipografia/NEUE MONTREAL/Neue Montreal Light Italic 300.otf') format('opentype');
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('../media/tipografia/NEUE MONTREAL/Neue Montreal Regular 400.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('../media/tipografia/NEUE MONTREAL/Neue Montreal Italic 400.otf') format('opentype');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('../media/tipografia/NEUE MONTREAL/Neue Montreal Medium 500.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('../media/tipografia/NEUE MONTREAL/Neue Montreal Medium Italic 500.otf') format('opentype');
+  font-weight: 500; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('../media/tipografia/NEUE MONTREAL/Neue Montreal Bold 700.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* DM Sans — official OFL variable font (latin subset) for 400–600 */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../media/tipografia/DM SANS/OFL-regular-medium/DMSans-latin-var.woff2') format('woff2-variations'),
+       url('../media/tipografia/DM SANS/OFL-regular-medium/DMSans-latin-var.woff2') format('woff2');
+  font-weight: 400 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../media/tipografia/DM SANS/OFL-regular-medium/DMSans-Italic-latin-var.woff2') format('woff2');
+  font-weight: 400 600; font-style: italic; font-display: swap;
+}
+/* DM Sans — supplied static files */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../media/tipografia/DM SANS/DMSans_18pt-Light.ttf') format('truetype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../media/tipografia/DM SANS/DMSans_18pt-Bold.ttf') format('truetype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* Metric-matched fallbacks reduce layout shift while fonts load */
+@font-face {
+  font-family: 'Neue Montreal Fallback';
+  src: local('Helvetica Neue'), local('Arial');
+  size-adjust: 98%; ascent-override: 92%; descent-override: 24%;
+}
+@font-face {
+  font-family: 'DM Sans Fallback';
+  src: local('Arial');
+  size-adjust: 102%; ascent-override: 94%; descent-override: 29%;
+}

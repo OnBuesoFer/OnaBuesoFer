@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#00231F" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="author" content="Ona" />
+    <!-- Favicon: the brand SVG, referenced from its original location (Vite fingerprints it at build). -->
+    <link rel="icon" href="/src/media/geminisobfFavicon.svg" type="image/svg+xml" />
+    <!-- PNG fallbacks rasterised from the same SVG by scripts/generate-og.ts -->
+    <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!--app-head-->
+    <script>
+      // Progressive enhancement flags (runs before first paint):
+      // .js enables reveal animations; .no-intro skips the intro on repeat visits / reduced motion.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var deep = /\/work\//.test(location.pathname);
+          if (reduce || deep || sessionStorage.getItem('ona-intro')) d.classList.add('no-intro');
+          sessionStorage.setItem('ona-intro', '1');
+        } catch (e) { d.classList.add('no-intro'); }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/entry-client.tsx"></script>
+  </body>
+</html>

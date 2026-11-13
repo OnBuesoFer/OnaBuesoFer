@@ -1,0 +1,19 @@
+{
+  "name": "ONA — UX/UI Designer & Creative Technologist",
+  "short_name": "ONA.",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#00231F",
+  "background_color": "#E8E8E8",
+  "display": "browser"
+}

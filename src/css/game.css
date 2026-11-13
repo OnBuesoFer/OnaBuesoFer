@@ -1,0 +1,56 @@
+/* ──────────────────────────────────────────────────────────────────
+   DESIGNER SURVIVAL — dialog & HUD
+   ────────────────────────────────────────────────────────────────── */
+.game-dialog {
+  width: min(100vw - 2rem, 30rem);
+  max-height: calc(100dvh - 2rem);
+  margin: auto; padding: var(--s-4);
+  border: 1px solid var(--green);
+  background: var(--deep); color: var(--paper);
+  overflow: auto;
+}
+.game-dialog::backdrop { background: rgb(0 0 0 / 0.72); backdrop-filter: blur(4px); }
+.game-dialog[open] { animation: dlg-in var(--t-base) var(--ease-out); }
+@keyframes dlg-in { from { opacity: 0; transform: translateY(16px) scale(0.98); } }
+.game-dialog__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-3); }
+.game-dialog__title { display: inline-flex; gap: var(--s-2); align-items: center; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-m); letter-spacing: -0.01em; }
+.game-dialog__loading { padding: var(--s-8) 0; text-align: center; color: var(--deep-muted); }
+
+.game { display: grid; gap: var(--s-3); }
+.game__hud { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--deep-line); }
+.game__hud > div { padding: var(--s-2) var(--s-3); border-right: 1px solid var(--deep-line); }
+.game__hud > div:last-child { border-right: 0; }
+.game__hud dt { color: var(--deep-muted); font-size: var(--fs-micro); }
+.game__hud dd { font-family: var(--font-display); font-weight: 500; font-size: 1.15rem; }
+.game__lives { display: flex; gap: 4px; align-items: center; height: 1.6rem; }
+.game__lives span { width: 10px; height: 10px; border: 1px solid var(--green); }
+.game__lives span.is-on { background: var(--green); }
+
+.game__stage { position: relative; width: min(100%, calc((100dvh - 15rem) * 0.6667)); min-width: 15rem; margin-inline: auto; border: 1px solid var(--deep-line); touch-action: none; user-select: none; -webkit-user-select: none; }
+.game__canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; cursor: crosshair; }
+.game__overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s-4);
+  padding: var(--s-5); text-align: center;
+  background: rgb(0 35 31 / 0.86);
+}
+.game__overlay--ready { background: rgb(0 35 31 / 0.78); }
+.game__kicker { color: var(--green); }
+.game__big { font-size: clamp(1.75rem, 7vw, 2.4rem); line-height: 1; text-transform: uppercase; }
+.game__overlay--ready .game__big { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+.game__legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 18rem; }
+.game__legend li { padding: 2px 6px; border: 1px solid var(--deep-line); color: var(--deep-muted); font-size: var(--fs-micro); }
+.game__score { font-family: var(--font-display); font-size: 2.5rem; color: var(--green); display: inline-flex; align-items: center; gap: var(--s-3); }
+.game__badge { font-size: var(--fs-micro); background: var(--green); color: var(--ink); padding: 2px 6px; }
+.game__cta { font-size: var(--fs-m); }
+.game__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); justify-content: center; }
+.game__how { color: var(--deep-muted); font-size: var(--fs-micro); }
+.game__controls { display: flex; align-items: center; gap: var(--s-2); }
+.game__controls .game__how { margin-left: auto; text-align: right; }
+.game__error { padding: var(--s-6); color: var(--green); }
+.game .btn { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+.game .btn--ghost { --btn-bg: transparent; --btn-fg: var(--paper); border-color: var(--paper); }
+@media (max-width: 480px) {
+  .game-dialog { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; border: 0; padding: var(--s-3); }
+  .game__controls .game__how { display: none; }
+}
