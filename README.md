@@ -1,149 +1,150 @@
-# ONA. — Portfolio
+# GEMINISOBF.DEV — Ona Bueso · Portfolio
 
-**UX/UI Designer & Creative Technologist** · *Art thinking. Technical mind. Digital experiences.*
+**Photography · Digital design · A technical mind behind both.**
 
-A bilingual (EN / ES) portfolio built around one idea: **from visual expression to digital experiences**.
-The site starts as an editorial, paper-like surface (art) and turns into a deep-green technical
-environment (technology) as you scroll.
+Bilingual (EN / ES) portfolio of Ona Bueso: photography and digital design as the main practice,
+with a technical background in multiplatform application development (DAM).
 
-- **System blueprint** (hero): a static DAM/ASIR architecture drawing — app, load balancer, APIs, SQL table mapping, firewall, switch, server rack — with a fixed code-matrix block. No motion, no scroll or pointer effects.
-- **Paper → Screen bridge**: a stepped pixel field that fills as the page crosses from art to technology.
-- **Selected Work**: an editorial index; each project previews its full page design inside a scrolling frame.
-- **Designer Survival**: an optional arcade mini-game behind **PLAY?** (60-second "iteration", keyboard + touch, sound with mute, local best score).
+🔗 **Live site:** https://onbuesofer.github.io/OnaBuesoFer/
 
 ---
+
+## What's inside
+
+**Home**
+- **Hero:** a static system blueprint (application, load balancer, APIs, an SQL table mapping, firewall,
+  switch and server rack) drawn on a 24 px grid. No motion and no scroll or pointer effects.
+- **Selected Work:** an editorial index of five web design projects (Porsche 911, MWC, QUANTEX Labs, Audi,
+  Nadie Dice Nada). Each one previews its full-page design in a scrolling frame and has its own case-study page.
+- **About**, **Disciplines** (Design · DAM · ASIR, each with a truthful status label), **Experience**,
+  **Education**, **Awards & Events** and **Contact**.
+- **Paper → Screen:** the page starts on a light editorial surface and turns into a deep-green technical
+  environment as you scroll.
+
+**Projects & Services** (`/projects-services/`)
+- **Services:** photography and digital design, with real project photography.
+- **Additional work:** an index by discipline that grows as new work is published.
+- **Status:** a "More coming soon" panel with a real count of published categories.
+- **Contact:** social media first.
+
+**Also:** Privacy Policy and Legal Notice pages, a 404 page, and **Designer Survival**, an optional
+arcade mini-game behind **PLAY?** (keyboard + touch, sound with mute, local best score).
 
 ## Stack
 
 | | |
 |---|---|
 | UI | React 19 + TypeScript (strict) |
-| Build | Vite 8 — client build + SSR build → static pre-rendering of every route |
-| Styling | Modern CSS with design tokens (custom properties), no CSS framework |
-| Interaction | Canvas 2D (hero blueprint, game), SVG (diagram, icons), CSS animations, View Transitions |
-| Images | `sharp` → responsive AVIF/WebP generated from the originals at build time |
+| Build | Vite 8: client build + SSR build → every route pre-rendered to static HTML |
+| Styling | Modern CSS with design tokens (custom properties) and a shared 12-column grid |
+| Graphics | Canvas 2D (hero blueprint, game), SVG, CSS transitions, View Transitions |
+| Images | `sharp` generates responsive AVIF/WebP from the originals at build time |
 
-No routing, animation or state libraries: the router is ~110 lines, scroll effects write a single CSS
-variable, and the canvas engines are framework-agnostic TypeScript classes. GSAP and Framer Motion
-were evaluated and not needed. Main bundle ≈ 84 kB gzip (mostly React); the hero blueprint (~3 kB)
-and the game (~6 kB) are separate chunks loaded on demand.
+No routing, animation or state libraries. The router is about 110 lines of code, and the canvas
+renderers are framework-agnostic TypeScript classes. The hero blueprint and the game load as separate chunks.
 
 ## Getting started
 
-Requires **Node 22.18+** (Node 24 recommended — see `.nvmrc`). TypeScript build scripts run natively in Node.
+Requires **Node 22.18+** (Node 24 recommended — see `.nvmrc`).
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173 — also generates responsive images
+npm run dev        # also generates the responsive images
 ```
 
 | Script | What it does |
 |---|---|
 | `npm run dev` | Dev server with hot reload |
 | `npm run build` | Images → typecheck → client build → SSR build → pre-render to `dist/` |
-| `npm run preview` | Serves `dist/` locally (http://localhost:4173) |
+| `npm run preview` | Serves the production build locally |
 | `npm run typecheck` | TypeScript only |
 | `npm run images` | Regenerates `public/generated/` (runs automatically) |
-| `npm run og` | Regenerates `og-image.png`, PNG favicon fallbacks and manifest from the brand SVG + fonts |
+| `npm run og` | Regenerates the share image, PNG favicons and manifest |
 
-## Editing content — no component changes needed
+## Editing content (no component changes needed)
 
 | What | Where |
 |---|---|
-| Email, LinkedIn, GitHub, location, availability, SEO | `src/config/site.ts` |
-| Projects (add / edit / reorder) | `src/config/projects.ts` |
+| Social links, SEO, site settings | `src/config/site.ts` |
+| Selected Work projects | `src/config/projects.ts` |
+| Services, service photos, additional work | `src/config/services.ts` |
 | Experience, education, awards, events | `src/config/profile.ts` |
-| Disciplines (Art & UX/UI · DAM · ASIR) and their truthful status | `src/config/disciplines.ts` |
-| Privacy Policy / Legal Notice text | `src/config/legal.ts` |
+| Disciplines and their status | `src/config/disciplines.ts` |
+| Privacy Policy / Legal Notice | `src/config/legal.ts` |
 | All interface copy (EN + ES) | `src/config/i18n.ts` |
-| Design tokens (colour, type, spacing, motion) | `src/css/tokens.css` |
-| Logo & favicon | `src/media/geminisobfFavicon.svg` (used as-is; replace the file to rebrand, then `npm run og`) |
+| Design tokens (colour, type, spacing) | `src/css/tokens.css` |
+| Logo & favicon | `src/media/geminisobfFavicon.svg` |
 
-Values set to `null` render as visible **PENDING** markers, never as fake links.
+Missing values (e.g. a social profile URL set to `null`) render as visible **PENDING** markers and are
+never turned into fake links.
 
-### Add a project
+### Add an image to a service
 
-1. Put the image in `src/media/projectes/`.
-2. Append an entry to `src/config/projects.ts`:
+Put the file in `src/media/projectes/` and reference it in `src/config/services.ts`:
 
 ```ts
-{
-  slug: 'my-project',
-  title: 'My Project',
-  category: { en: 'Web Design', es: 'Diseño web' },
-  type: { en: 'Personal Project', es: 'Proyecto personal' },
-  discipline: 'development',        // 'design' | 'development' (DAM) | 'systems' (ASIR)
-  year: 2026,                       // or null until confirmed
-  summary: { en: '…', es: '…' },
-  cover: { file: 'My_Project.png', width: 1920, height: 4000, alt: { en: '…', es: '…' } },
-  // optional: sections (with images, diagrams, code excerpts), gallery, credits, brandConcept
-},
+{ image: { file: 'pg/MyPhoto.jpg', width: 4000, height: 5000, alt: { en: '…', es: '…' } },
+  ratio: 'auto',                       // 'auto' keeps the photo's own proportions
+  caption: { en: '…', es: '…' } }
 ```
 
-3. `npm run dev`. Responsive images, the case-study page (`/work/my-project/`), previous/next links
-   and the sitemap entry are all generated automatically.
+### Add a project to Selected Work
+
+Append an entry to `src/config/projects.ts` (title, category, type, summary and `cover` image).
+The responsive images, case-study page, previous/next links and sitemap entry are generated automatically.
 
 ## Project structure
 
 ```
-index.html                 HTML shell (head tags are injected per route at build time)
-public/                    favicon, og-image, manifest (+ generated/ — git-ignored)
+index.html                   HTML shell (head tags injected per route at build time)
+public/                      favicon, share image, manifest (+ generated/, git-ignored)
 scripts/
-  optimize-images.ts       originals → AVIF/WebP variants (published projects only)
-  generate-og.ts           brand OG image + favicons from the real fonts
-  prerender.ts             static HTML for every route, sitemap.xml, robots.txt, 404.html
+  optimize-images.ts         originals → AVIF/WebP variants (published images only)
+  generate-og.ts             share image + favicons from the brand fonts and logo
+  prerender.ts               static HTML for every route, sitemap.xml, robots.txt, 404.html
 src/
-  config/                  ← all content (site, projects, profile, i18n)
-  types/                   content model
-  css/                     tokens, fonts, base + one stylesheet per area
-  js/blueprint/blueprint.ts  static hero system blueprint (Canvas 2D, renders on resize only)
-  js/game/engine.ts        Designer Survival (Canvas 2D + Web Audio)
-  components/              layout · sections · work · ui · game
-  pages/                   Home, Project (case study), 404
-  hooks/  lib/             media queries, reveal, scroll progress · router, i18n, head/SEO, media helpers
-  media/                   original assets (unchanged): moodboard/, projectes/, tipografia/
+  config/                    all content
+  pages/                     Home, Project (case study), Projects & Services, Legal, 404
+  components/                layout · sections · work · ui · game
+  css/                       tokens, fonts, base + one stylesheet per area
+  js/blueprint/              static hero blueprint (Canvas 2D)
+  js/game/                   Designer Survival (Canvas 2D + Web Audio)
+  lib/  hooks/  types/       router, i18n, SEO, media helpers · hooks · content model
+  media/                     original assets: projectes/, tipografia/, logo
 ```
-
-## Fonts
-
-- **Neue Montreal** (headings): served from `src/media/tipografia/NEUE MONTREAL/` as supplied (OTF, unmodified).
-  ⚠ Pangram Pangram's free licence is personal-use only — **confirm a web-embedding licence before publishing**.
-- **DM Sans** (UI/body): weights 400–500 + italic come from the official OFL variable font, added in
-  `src/media/tipografia/DM SANS/OFL-regular-medium/` (with `OFL.txt` and Latin-subset WOFF2 copies);
-  Light 300 and Bold 700 use the supplied files.
-- Duplicate font files (`… 2.otf`, `… 3.ttf`) are left untouched; only one copy of each is referenced.
 
 ## Deployment
 
-The build is fully static (`dist/`). Set `SITE_URL` before a production build so canonical URLs,
-Open Graph tags (LinkedIn needs absolute image URLs) and `sitemap.xml` are correct — see `.env.example`.
-
-### Vercel (recommended)
-
-1. Import the GitHub repository in Vercel. `vercel.json` already sets the build command and output.
-2. Add the environment variable `SITE_URL` (e.g. `https://your-domain.com`).
-3. Deploy. Preview deployments are created for every branch.
-
-### GitHub Pages
+The site is fully static (`dist/`) and is published with **GitHub Pages**:
 
 1. Settings → Pages → Source: **GitHub Actions**.
-2. Settings → Secrets and variables → Actions → Variables: `SITE_URL` = `https://<user>.github.io`.
-3. Actions → **Deploy to GitHub Pages** → Run workflow (manual only, nothing deploys on push).
-   The workflow builds with `BASE_PATH=/<repo>/` automatically.
+2. Actions → **Deploy to GitHub Pages** → **Run workflow**. The workflow is manual, so pushing to
+   `main` does **not** publish on its own. It builds with `BASE_PATH=/<repo>/` automatically.
+3. Optional: add the repository variable `SITE_URL` (`https://onbuesofer.github.io`) so canonical URLs,
+   Open Graph tags and `sitemap.xml` use absolute URLs.
 
-## Privacy & assets
+The project can also be deployed to Vercel: `vercel.json` is included. Set `BASE_PATH=/` there.
 
-- `src/media/projectes/Projecte_Morph.png` is **private**: it is git-ignored and never processed or published.
-- Brand concept projects (Porsche, Audi, MWC, Formula One) show a non-affiliation note.
-- No analytics, cookies or contact form. Only the game's best score and mute preference use `localStorage`.
+## Privacy
+
+- Private, unpublished work is git-ignored and never processed or published.
+- Projects based on existing brands (Porsche, Audi, MWC) show a non-affiliation note.
+- No analytics, no cookies, no contact form. Only the game's best score and sound preference are stored
+  locally in the browser.
 
 ## Accessibility & performance
 
-- Semantic landmarks, skip link, one `h1` per page, visible focus states (ink on paper, green on deep).
-- Green is used as text only on dark surfaces (8.6:1); on paper it is a fill behind black text (11.6:1).
-- `prefers-reduced-motion`: no intro, no pans, instant transitions (the hero blueprint is always static).
-- Canvas loops pause off-screen and in background tabs; DPR capped at 2.
-- Images have intrinsic sizes (no layout shift), AVIF/WebP, lazy loading; fonts use `font-display: swap`
-  with metric-adjusted fallbacks.
-# portfolio
-# OnaBuesoFer
+- Semantic landmarks, a skip link, one `h1` per page and visible focus states.
+- Colour contrast checked: green is used as text only on dark surfaces.
+- `prefers-reduced-motion` is respected; the hero is always static.
+- Images have intrinsic sizes (no layout shift) and are served as AVIF/WebP with lazy loading.
+
+## Fonts
+
+- **Neue Montreal** (headings), served as supplied. Pangram Pangram's free licence is for personal use;
+  confirm a web-embedding licence for commercial use.
+- **DM Sans** (body / UI), under the SIL Open Font License.
+
+---
+
+© Ona Bueso · GEMINISOBF.DEV
