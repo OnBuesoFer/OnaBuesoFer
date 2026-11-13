@@ -143,3 +143,4 @@ Open Graph tags (LinkedIn needs absolute image URLs) and `sitemap.xml` are corre
 - Images have intrinsic sizes (no layout shift), AVIF/WebP, lazy loading; fonts use `font-display: swap`
   with metric-adjusted fallbacks.
 # portfolio
+# OnaBuesoFer
