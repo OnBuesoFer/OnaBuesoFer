@@ -45,7 +45,10 @@ for (const img of images) {
     console.warn(`  ⚠ ${img.file}: real size ${meta.width}×${meta.height} ≠ projects.ts ${img.width}×${img.height}`);
   }
   const jobs: Promise<unknown>[] = [];
-  for (const w of WIDTHS.filter((w) => w <= img.width)) {
+  // Same rule as widthsFor() in src/lib/media.ts
+  const widths = WIDTHS.filter((w) => w <= img.width);
+  if (img.width < WIDTHS[WIDTHS.length - 1]! && !widths.includes(img.width)) widths.push(img.width);
+  for (const w of widths) {
     for (const fmt of ['avif', 'webp'] as const) {
       const out = join(OUT, `${stem(img.file)}-${w}.${fmt}`);
       if (fresh(out, src)) continue;

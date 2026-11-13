@@ -12,7 +12,10 @@ export function MediaSlot({ slot, className = '' }: { slot: Slot; className?: st
   const t = useT();
   return (
     <figure className={`media-slot ${className}`}>
-      <div className="media-slot__frame" style={{ aspectRatio: slot.ratio }}>
+      <div
+        className="media-slot__frame"
+        style={{ aspectRatio: slot.ratio === 'auto' ? (slot.image ? `${slot.image.width} / ${slot.image.height}` : '1 / 1') : slot.ratio }}
+      >
         {slot.image ? (
           <ProjectPicture image={slot.image} className="media-slot__img" sizes="(min-width: 1024px) 50vw, 100vw" />
         ) : (
@@ -21,7 +24,7 @@ export function MediaSlot({ slot, className = '' }: { slot: Slot; className?: st
             <span className="media-slot__mark media-slot__mark--tr" aria-hidden="true" />
             <span className="media-slot__mark media-slot__mark--bl" aria-hidden="true" />
             <span className="media-slot__mark media-slot__mark--br" aria-hidden="true" />
-            <span className="pending">{t.services.services.pending} · {slot.ratio.replace('/', ':')}</span>
+            <span className="pending">{t.services.services.pending}{slot.ratio !== 'auto' ? ` · ${slot.ratio.replace('/', ':')}` : ''}</span>
           </div>
         )}
       </div>

@@ -66,13 +66,13 @@ export function ServicesPage() {
         <div className="wrap">
           <SectionHead index="02" eyebrow={s.services.eyebrow} id="svc-services-title">{s.services.title}</SectionHead>
           {services.map((sv, i) => (
-            <article key={sv.id} className={`service service--${i % 2 ? 'b' : 'a'}`} aria-labelledby={`service-${sv.id}`}>
+            <article key={sv.id} className={`service service--${i % 2 ? 'b' : 'a'}`} aria-labelledby={sv.name ? `service-${sv.id}` : `service-${sv.id}-statement`}>
               <header className="service__head">
                 <p className="service__meta label" aria-hidden="true">
                   <span className="num">{pad(i + 1)}</span> <span className="service__code">{sv.code}</span>
                 </p>
-                <h3 id={`service-${sv.id}`} className="service__name display reveal">{l(sv.name)}</h3>
-                <p className="service__statement reveal">{l(sv.statement)}</p>
+                {sv.name && <h3 id={`service-${sv.id}`} className="service__name display reveal">{l(sv.name)}</h3>}
+                <p id={`service-${sv.id}-statement`} className="service__statement reveal">{l(sv.statement)}</p>
               </header>
               <div className="service__media">
                 {sv.media.map((m, j) => <MediaSlot key={j} slot={m} className={`service__slot service__slot--${j}`} />)}

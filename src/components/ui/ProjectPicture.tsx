@@ -1,5 +1,5 @@
 import type { ProjectImage } from '../../types/content.ts';
-import { posterUrl, srcSet, variantUrl } from '../../lib/media.ts';
+import { posterUrl, srcSet, variantUrl, widthsFor } from '../../lib/media.ts';
 import { useL } from '../../lib/i18n.tsx';
 
 interface Props {
@@ -31,7 +31,7 @@ export function ProjectPicture({ image, mode = 'full', sizes = '100vw', classNam
       <source type="image/avif" srcSet={srcSet(image, 'avif')} sizes={sizes} />
       <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={sizes} />
       <img
-        src={variantUrl(image.file, 1080, 'webp')}
+        src={variantUrl(image.file, Math.max(...widthsFor(image.width).filter((w) => w <= 1080)), 'webp')}
         width={image.width}
         height={image.height}
         alt={alt}

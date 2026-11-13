@@ -22,8 +22,16 @@ export function posterUrl(file: string, width: 960 | 1200, format: 'webp' | 'jpg
   return `${BASE}generated/projectes/${stem(file)}-poster-${width}.${format}`;
 }
 
+/** Standard widths up to the image's size, plus its native width when it is
+ *  smaller than the largest standard width (so small images stay sharp). */
+export function widthsFor(width: number): number[] {
+  const ws: number[] = WIDTHS.filter((w) => w <= width);
+  if (width < WIDTHS[WIDTHS.length - 1]! && !ws.includes(width)) ws.push(width);
+  return ws;
+}
+
 export function srcSet(img: ProjectImage, format: string): string {
-  return WIDTHS.filter((w) => w <= img.width)
+  return widthsFor(img.width)
     .map((w) => `${variantUrl(img.file, w, format)} ${w}w`)
     .join(', ');
 }

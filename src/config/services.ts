@@ -16,14 +16,16 @@ import type { Localized, ProjectImage } from '../types/content.ts';
 export interface MediaSlot {
   /** Image when available; `null` renders a marked placeholder. */
   image: ProjectImage | null;
-  ratio: '4/5' | '3/2' | '16/10' | '1/1';
+  /** Frame ratio. 'auto' = the image's own proportions (no crop). */
+  ratio: '4/5' | '3/2' | '16/10' | '1/1' | 'auto';
   caption: Localized;
 }
 
 export interface Service {
   id: string;
   code: string;
-  name: Localized;
+  /** Section title. Optional: omit it to show the block without a heading. */
+  name?: Localized;
   statement: Localized;
   offerings: Localized[];
   media: MediaSlot[];
@@ -68,22 +70,44 @@ export const services: Service[] = [
   {
     id: 'photography',
     code: 'PH',
-    name: { en: 'Photography', es: 'Fotografía' },
     statement: {
-      en: 'Images built with care for light, composition and detail — for brands, projects and digital platforms.',
-      es: 'Imágenes construidas con cuidado por la luz, la composición y el detalle — para marcas, proyectos y plataformas digitales.',
+      en: 'Images crafted in every detail, where light, composition and visual sensitivity shape the essence of each brand and project.',
+      es: 'Imágenes cuidadas en cada detalle, donde la luz, la composición y la sensibilidad visual dan forma a la esencia de cada marca y proyecto.',
     },
     offerings: [
       { en: 'Professional photography', es: 'Fotografía profesional' },
-      { en: 'Creative and artistic photography', es: 'Fotografía creativa y artística' },
       { en: 'Product and detail photography', es: 'Fotografía de producto y detalle' },
       { en: 'Visual storytelling', es: 'Narrativa visual' },
       { en: 'Digital image editing and post-production', es: 'Edición digital y postproducción' },
       { en: 'Photography for brands, projects and digital platforms', es: 'Fotografía para marcas, proyectos y plataformas digitales' },
     ],
     media: [
-      { image: null, ratio: '4/5', caption: { en: 'Portrait format', es: 'Formato vertical' } },
-      { image: null, ratio: '3/2', caption: { en: 'Landscape format', es: 'Formato horizontal' } },
+      {
+        image: {
+          file: 'pg/Boda01.jpg',
+          width: 3456,
+          height: 4320,
+          alt: {
+            en: 'Black-and-white wedding portrait: the bride laughing, holding her bouquet.',
+            es: 'Retrato de boda en blanco y negro: la novia riendo con el ramo en las manos.',
+          },
+        },
+        ratio: '4/5',
+        caption: { en: 'Portrait format', es: 'Formato vertical' },
+      },
+      {
+        image: {
+          file: 'pg/Boda02.jpg',
+          width: 3689,
+          height: 3689,
+          alt: {
+            en: 'Wedding detail: red roses tied with a white ribbon beside a wooden ring box.',
+            es: 'Detalle de boda: rosas rojas atadas con un lazo blanco junto a una caja de anillos de madera.',
+          },
+        },
+        ratio: '3/2',
+        caption: { en: 'Landscape format', es: 'Formato horizontal' },
+      },
     ],
   },
   {
@@ -91,21 +115,43 @@ export const services: Service[] = [
     code: 'DD',
     name: { en: 'Digital Design', es: 'Diseño digital' },
     statement: {
-      en: 'Visual systems and content that communicate clearly — from identity to the everyday assets a project needs.',
-      es: 'Sistemas visuales y contenido que comunican con claridad — desde la identidad hasta las piezas que un proyecto necesita cada día.',
+      en: 'Visual identities and digital solutions that communicate with clarity and coherence, from the brand concept to every piece that brings the project to life.',
+      es: 'Identidades visuales y soluciones digitales que comunican con claridad y coherencia, desde el concepto de marca hasta cada pieza que da vida al proyecto.',
     },
     offerings: [
       { en: 'Graphic design', es: 'Diseño gráfico' },
       { en: 'Visual identity and branding', es: 'Identidad visual y branding' },
       { en: 'Digital compositions', es: 'Composiciones digitales' },
-      { en: 'Creative direction', es: 'Dirección creativa' },
-      { en: 'Social media design', es: 'Diseño para redes sociales' },
       { en: 'Editorial and visual communication', es: 'Diseño editorial y comunicación visual' },
       { en: 'Digital assets and visual content', es: 'Recursos digitales y contenido visual' },
     ],
     media: [
-      { image: null, ratio: '16/10', caption: { en: 'Identity / composition', es: 'Identidad / composición' } },
-      { image: null, ratio: '1/1', caption: { en: 'Social / digital asset', es: 'Redes / recurso digital' } },
+      {
+        image: {
+          file: 'pg/DisseñoGeminis.png',
+          width: 1024,
+          height: 1024,
+          alt: {
+            en: 'GEMINISOBF.DEV brand identity mockup: green notebook with the logo, white shirt, pen and business card.',
+            es: 'Mockup de identidad de marca GEMINISOBF.DEV: libreta verde con el logotipo, camisa blanca, bolígrafo y tarjeta.',
+          },
+        },
+        ratio: 'auto',
+        caption: { en: 'Identity / composition', es: 'Identidad / composición' },
+      },
+      {
+        image: {
+          file: 'pg/DisseñoNavidad.png',
+          width: 4789,
+          height: 7000,
+          alt: {
+            en: 'Poster design “Cheers to the New Year” with a martini glass illustration, shown in an illuminated frame.',
+            es: 'Diseño de cartel «Cheers to the New Year» con la ilustración de una copa de martini, en un marco iluminado.',
+          },
+        },
+        ratio: 'auto',
+        caption: { en: 'Social / digital asset', es: 'Redes / recurso digital' },
+      },
     ],
   },
 ];
