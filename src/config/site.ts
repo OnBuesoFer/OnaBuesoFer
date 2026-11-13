@@ -22,9 +22,9 @@ export const site = {
 
   social: [
     { id: 'email', label: 'Email', href: null }, // 'mailto:you@domain.com' — PENDING
-    { id: 'instagram', label: 'Instagram', href: null }, // 'https://www.instagram.com/…' — PENDING
-    { id: 'linkedin', label: 'LinkedIn', href: null }, // 'https://www.linkedin.com/in/…' — PENDING
-    { id: 'github', label: 'GitHub', href: null }, // 'https://github.com/…' — PENDING
+    { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/geminisobf.dev/?hl=es' },
+    { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/onabueso' },
+    { id: 'github', label: 'GitHub', href: 'https://github.com/OnBuesoFer' },
   ] satisfies SocialLink[] as SocialLink[],
 
   seo: {
