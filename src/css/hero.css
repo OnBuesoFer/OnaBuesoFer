@@ -7,7 +7,6 @@
   display: flex;
   overflow: hidden;
   isolation: isolate;
-  touch-action: pan-y;
 }
 .hero__grid-lines {
   position: absolute; inset: 0; z-index: -2; pointer-events: none;
@@ -21,10 +20,13 @@
   position: absolute; inset: 0; z-index: -1;
   width: 100%; height: 100%;
   opacity: 0;
-  transition: opacity 1.2s var(--ease-out) 0.2s;
+  /* Fades in with the headline (same delay as .hero__line) so art and type arrive together. */
+  transition: opacity 1.2s var(--ease-out) 1.25s;
+  contain: strict;
   /* keep the navigation area clean */
   mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--header-h) + 3rem));
 }
+.no-intro .quantize { transition-delay: 0.1s; }
 .quantize.is-ready { opacity: 1; }
 
 .hero__inner {
@@ -39,8 +41,11 @@
 .hero__top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-5); }
 .hero__id { display: grid; gap: var(--s-1); }
 .hero__name { font-size: var(--fs-m); font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
-.hero__coords { display: flex; gap: 0.5em; }
-.hero__x { color: var(--fg); }
+
+/* ── Professional identity (static): DAM ───────────────────────── */
+.identity { display: grid; justify-items: end; gap: var(--stack-xs); text-align: right; }
+.identity__code { font-size: var(--fs-m); font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; text-transform: uppercase; }
+.identity__full { color: var(--muted); }
 
 .hero__title {
   margin-top: auto;
@@ -66,25 +71,22 @@
   padding-top: var(--s-5);
   border-top: 1px solid var(--line);
 }
-.hero__support { grid-column: 1 / span 4; font-size: var(--fs-m); line-height: 1.35; max-width: 26ch; }
+.hero__support { grid-column: 1 / span 4; font-size: var(--fs-m); line-height: 1.35; max-width: var(--measure-xs); }
 .hero__bottom .btn { grid-column: 5 / span 3; justify-self: start; }
 .hero__social { grid-column: 8 / span 3; }
-.hero__hint { grid-column: 11 / -1; justify-self: end; display: inline-flex; align-items: center; gap: var(--s-2); }
-.hero__hint-box { width: 10px; height: 10px; border: 1px solid currentColor; animation: hint 2.4s var(--ease-step) infinite; }
-@keyframes hint { 0%, 100% { background: transparent; } 50% { background: var(--green); border-color: var(--green); } }
 
 @media (max-width: 1023px) {
   .hero__support { grid-column: 1 / span 7; }
   .hero__bottom .btn { grid-column: 8 / -1; justify-self: end; }
   .hero__social { grid-column: 1 / span 8; }
-  .hero__hint { grid-column: 9 / -1; }
 }
 @media (max-width: 767px) {
   .hero { min-height: 100svh; }
   .hero__title { font-size: clamp(2.6rem, 12.4vw, 4.5rem); padding-block: var(--s-8) var(--s-6); }
   .hero__line--indent { padding-left: 0.6em; }
-  .hero__coords { display: none; }
+  .hero__top { flex-direction: column; gap: var(--stack-m); }
+  .identity { justify-items: start; text-align: left; }
   .hero__bottom { grid-template-columns: 1fr; }
-  .hero__support, .hero__bottom .btn, .hero__social, .hero__hint { grid-column: 1 / -1; justify-self: start; }
+  .hero__support, .hero__bottom .btn, .hero__social { grid-column: 1 / -1; justify-self: start; }
   .hero__bottom .btn { width: 100%; justify-content: space-between; }
 }

@@ -12,21 +12,26 @@ import { pathToFileURL } from 'node:url';
 const ROOT = resolve(import.meta.dirname, '..');
 const DIST = join(ROOT, 'dist');
 const SSR_ENTRY = join(DIST, '.ssr/entry-server.js');
-const BASE = (process.env.BASE_PATH || '/').replace(/\/?$/, '/');
+
 
 interface ServerModule {
   render: (path: string, base: string) => { html: string; head: string; lang: string };
   projects: { slug: string }[];
   LEGAL_SLUGS: readonly string[];
+  SERVICES_SLUG: string;
   site: { url: string };
 }
 
 const mod = (await import(pathToFileURL(SSR_ENTRY).href)) as ServerModule;
 const template = readFileSync(join(DIST, 'index.html'), 'utf8');
+// The deploy base is whatever Vite built with (vite.config.ts / BASE_PATH):
+// read it back from the client entry URL so the two can never disagree.
+const BASE = /<script[^>]+src="([^"]*?)assets\//.exec(template)?.[1] ?? '/';
 
 const routes = ['/', '/es/'];
 for (const p of mod.projects) routes.push(`/work/${p.slug}/`, `/es/work/${p.slug}/`);
 for (const slug of mod.LEGAL_SLUGS) routes.push(`/${slug}/`, `/es/${slug}/`);
+routes.push(`/${mod.SERVICES_SLUG}/`, `/es/${mod.SERVICES_SLUG}/`);
 
 function page(route: string): string {
   const url = BASE.replace(/\/$/, '') + route;

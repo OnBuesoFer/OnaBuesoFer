@@ -9,7 +9,7 @@
   background: var(--deep); color: var(--paper);
   overflow: auto;
 }
-.game-dialog::backdrop { background: rgb(0 0 0 / 0.72); backdrop-filter: blur(4px); }
+.game-dialog::backdrop { background: rgb(0 0 0 / 0.82); }
 .game-dialog[open] { animation: dlg-in var(--t-base) var(--ease-out); }
 @keyframes dlg-in { from { opacity: 0; transform: translateY(16px) scale(0.98); } }
 .game-dialog__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-3); }

@@ -101,16 +101,19 @@ p { text-wrap: pretty; }
   display: grid;
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   column-gap: var(--gutter);
-  align-items: end;
-  padding-bottom: var(--s-5);
-  margin-bottom: var(--s-8);
+  row-gap: var(--stack-m);
+  align-items: start;
+  padding-bottom: var(--stack-m);
+  margin-bottom: var(--stack-l);
   border-bottom: var(--hair) solid var(--line);
 }
-.sec-head__meta { grid-column: 1 / span 3; display: flex; gap: var(--s-4); align-self: start; padding-top: 0.6em; }
+.sec-head__meta { grid-column: 1 / span 3; display: flex; gap: var(--stack-s); padding-top: var(--cap-offset); }
 .sec-head__title { grid-column: 4 / -1; font-size: var(--fs-xl); }
+.sec-head__intro { grid-column: 4 / span 6; max-width: var(--measure-s); font-size: var(--fs-m); line-height: 1.4; color: var(--muted); }
+.sec-head__extra { grid-column: 4 / -1; }
 @media (max-width: 767px) {
-  .sec-head { grid-template-columns: 1fr; row-gap: var(--s-4); margin-bottom: var(--s-7); }
-  .sec-head__meta, .sec-head__title { grid-column: 1 / -1; }
+  .sec-head { grid-template-columns: 1fr; row-gap: var(--stack-s); }
+  .sec-head__meta, .sec-head__title, .sec-head__intro, .sec-head__extra { grid-column: 1 / -1; }
 }
 
 /* ── Links & buttons ───────────────────────────────────────────── */
@@ -129,7 +132,7 @@ p { text-wrap: pretty; }
   --btn-fg: var(--bg);
   position: relative;
   display: inline-flex; align-items: center; gap: var(--s-3);
-  min-height: 48px;
+  min-height: var(--hit);
   padding: 0 var(--s-5);
   font-size: var(--fs-s); font-weight: 500;
   letter-spacing: 0.04em; text-transform: uppercase;
@@ -161,7 +164,7 @@ p { text-wrap: pretty; }
   color: var(--muted);
   vertical-align: middle;
 }
-.pending::before { content: ''; width: 6px; height: 6px; background: var(--accent-fill); }
+.pending::before { content: ''; width: var(--tick); height: var(--tick); background: var(--accent-fill); }
 
 /* Square pixel bullet — the recurring motif */
 .px { display: inline-block; width: 0.5em; height: 0.5em; background: var(--accent-fill); flex: none; }

@@ -13,9 +13,11 @@ export type Route =
   | { name: 'home'; lang: Lang }
   | { name: 'project'; lang: Lang; slug: string }
   | { name: 'legal'; lang: Lang; slug: LegalSlug }
+  | { name: 'services'; lang: Lang }
   | { name: 'notfound'; lang: Lang };
 
 export const LEGAL_SLUGS = ['privacy', 'legal-notice'] as const;
+export const SERVICES_SLUG = 'projects-services';
 export type LegalSlug = (typeof LEGAL_SLUGS)[number];
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, ''); // '' or '/repo'
@@ -33,6 +35,7 @@ export function parseRoute(pathname: string): Route {
   let lang: Lang = 'en';
   if (parts[0] === 'es') { lang = 'es'; parts.shift(); }
   if (parts.length === 0) return { name: 'home', lang };
+  if (parts.length === 1 && parts[0] === SERVICES_SLUG) return { name: 'services', lang };
   if (parts.length === 1 && (LEGAL_SLUGS as readonly string[]).includes(parts[0]!)) return { name: 'legal', lang, slug: parts[0] as LegalSlug };
   if (parts.length === 2 && parts[0] === 'work' && parts[1]) return { name: 'project', lang, slug: parts[1] };
   return { name: 'notfound', lang };
@@ -43,6 +46,7 @@ export function routePath(r: Route): string {
   const prefix = r.lang === 'es' ? '/es' : '';
   if (r.name === 'project') return `${prefix}/work/${r.slug}/`;
   if (r.name === 'legal') return `${prefix}/${r.slug}/`;
+  if (r.name === 'services') return `${prefix}/${SERVICES_SLUG}/`;
   return `${prefix}/`;
 }
 

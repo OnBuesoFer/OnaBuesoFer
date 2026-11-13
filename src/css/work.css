@@ -1,10 +1,10 @@
 /* ──────────────────────────────────────────────────────────────────
    SELECTED WORK — editorial index + scrolling page frame.
    ────────────────────────────────────────────────────────────────── */
-.work__intro { max-width: 36ch; font-size: var(--fs-m); line-height: 1.35; margin: calc(var(--s-8) * -0.5) 0 var(--s-8) calc((100% + var(--gutter)) / 12 * 3); }
 .work__layout { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
 .work__list { grid-column: 1 / span 6; border-top: 1px solid var(--fg); counter-reset: w; }
-.work__panel { grid-column: 7 / -1; position: relative; }
+.work__panel { grid-column: 7 / -1; grid-row: 1 / span 2; position: relative; }
+.work__more { grid-column: 1 / span 6; padding-top: var(--stack-m); }
 .work__sticky { position: sticky; top: calc(var(--header-h) + var(--s-6)); }
 
 .work-row { border-bottom: 1px solid var(--line); }
@@ -32,14 +32,9 @@
   border: 1px solid var(--line);
   transition: background-color var(--t-base) var(--ease-step), border-color var(--t-base);
 }
-.work-row__link::before {
-  content: ''; position: absolute; left: 0; top: 50%; width: 10px; height: 10px; margin-top: -5px;
-  background: var(--green); transform: scale(0); transition: transform var(--t-base) var(--ease-step);
-}
 @media (hover: hover) {
   .work-row.is-active .work-row__title, .work-row__link:hover .work-row__title, .work-row__link:focus-visible .work-row__title { transform: translateX(calc(3rem * 0.6)); }
   .work-row.is-active .work-row__arrow, .work-row__link:hover .work-row__arrow { background: var(--green); border-color: var(--green); }
-  .work-row.is-active .work-row__link::before { transform: scale(1); }
   .work-row.is-active .work-row__title em { font-style: italic; }
 }
 .work-row__media { display: none; }
@@ -71,9 +66,9 @@
 .px-placeholder .pending { position: relative; background: var(--paper); color: var(--ink); border-color: var(--ink); }
 
 @media (max-width: 1023px) {
-  .work__intro { margin-left: 0; margin-top: 0; }
   .work__list { grid-column: 1 / -1; }
   .work__panel { display: none; }
+  .work__more { grid-column: 1 / -1; }
   .work-row__media { display: block; padding-bottom: var(--s-6); }
   .work-row.is-in .frame__img { animation: pan calc(var(--ratio) * 7s) var(--ease-in-out) 0.8s infinite alternate; }
 }

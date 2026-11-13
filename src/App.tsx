@@ -12,6 +12,7 @@ import { HomePage } from './pages/HomePage.tsx';
 import { ProjectPage } from './pages/ProjectPage.tsx';
 import { NotFoundPage } from './pages/NotFoundPage.tsx';
 import { LegalPage } from './pages/LegalPage.tsx';
+import { ServicesPage } from './pages/ServicesPage.tsx';
 
 export function App({ initialPath }: { initialPath: string }) {
   return (
@@ -48,6 +49,7 @@ function Frame() {
   const page =
     route.name === 'home' ? <HomePage /> :
     route.name === 'project' ? <ProjectPage key={route.slug} slug={route.slug} /> :
+    route.name === 'services' ? <ServicesPage /> :
     route.name === 'legal' ? <LegalPage key={route.slug} slug={route.slug} /> :
     <NotFoundPage />;
 

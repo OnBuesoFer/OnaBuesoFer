@@ -29,6 +29,7 @@ export function ProjectPage({ slug }: { slug: string }) {
         </Link>
         <h1 id="case-title" className="case__title display">{p.title}</h1>
         <dl className="case__meta">
+          <div><dt className="label label--muted">{t.project.discipline}</dt><dd>{t.project.disciplines[p.discipline]}</dd></div>
           <div><dt className="label label--muted">{t.project.category}</dt><dd>{l(p.category)}</dd></div>
           <div><dt className="label label--muted">{t.project.type}</dt><dd>{l(p.type)}</dd></div>
           {p.year && <div><dt className="label label--muted">{t.project.year}</dt><dd className="num">{p.year}</dd></div>}
@@ -46,6 +47,16 @@ export function ProjectPage({ slug }: { slug: string }) {
           <h2 className="label"><span className="num">{String(i + 1).padStart(2, '0')}</span> {l(s.title)}</h2>
           <p className="case__body">{l(s.body)}</p>
           {s.images?.map((img) => <ProjectPicture key={img.file} image={img} className="case__img" sizes="(min-width: 1280px) 1200px, 100vw" />)}
+          {s.diagrams?.map((img) => <ProjectPicture key={img.file} image={img} className="case__diagram" sizes="(min-width: 1280px) 1200px, 100vw" />)}
+          {s.code?.map((c, j) => (
+            <figure key={j} className="case__code" data-tone="dark">
+              <figcaption className="case__code-head label">
+                <span>{t.project.code}</span><span className="num">{c.language}</span>
+              </figcaption>
+              <pre tabIndex={0}><code>{c.content.split('\n').map((line, k) => <span key={k} className="case__code-line">{line}{'\n'}</span>)}</code></pre>
+              {c.caption && <p className="case__code-caption label label--muted">{l(c.caption)}</p>}
+            </figure>
+          ))}
         </section>
       ))}
 

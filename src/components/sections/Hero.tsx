@@ -1,22 +1,30 @@
-import { useRef } from 'react';
 import { site } from '../../config/site.ts';
 import { useT } from '../../lib/i18n.tsx';
-import { useCoarsePointer } from '../../hooks/useMediaQuery.ts';
 import { Icon } from '../ui/Icon.tsx';
 import { SocialLinks } from '../ui/SocialLinks.tsx';
-import { QuantizeCanvas } from './QuantizeCanvas.tsx';
+import { BlueprintCanvas } from './BlueprintCanvas.tsx';
+
+/** Static professional identity — DAM. No rotation, no animation. */
+function HeroIdentity() {
+  const t = useT();
+  const { code, full } = t.hero.identity;
+  return (
+    <p className="identity">
+      <span className="identity__code display">{code}</span>
+      <span className="identity__full label">{full}</span>
+    </p>
+  );
+}
 
 export function Hero() {
   const t = useT();
-  const ref = useRef<HTMLElement>(null);
-  const coarse = useCoarsePointer();
   const [l1, l2, l3] = t.hero.lines;
   const [l2a, ...l2b] = (l2 ?? '').split(' ');
 
   return (
-    <section ref={ref} className="hero" data-tone="light" aria-labelledby="hero-title">
+    <section className="hero" data-tone="light" aria-labelledby="hero-title">
       <div className="hero__grid-lines" aria-hidden="true" />
-      <QuantizeCanvas surfaceRef={ref} label={t.hero.canvasLabel} />
+      <BlueprintCanvas label={t.hero.canvasLabel} />
 
       <div className="hero__inner wrap">
         <div className="hero__top">
@@ -24,9 +32,7 @@ export function Hero() {
             <span className="hero__name display">{site.name}</span>
             <span className="label">{site.title}</span>
           </p>
-          <p className="hero__coords label label--muted" aria-hidden="true">
-            <span>Art</span> <span className="hero__x">×</span> <span>Technology</span>
-          </p>
+          <HeroIdentity />
         </div>
 
         <h1 id="hero-title" className="hero__title display">
@@ -42,9 +48,6 @@ export function Hero() {
             <span className="btn__arrow"><Icon name="arrow-down" size={16} /></span>
           </a>
           <SocialLinks className="hero__social" />
-          <p className="hero__hint label label--muted" aria-hidden="true">
-            <span className="hero__hint-box" /> {coarse ? t.hero.hintTouch : t.hero.hint}
-          </p>
         </div>
       </div>
     </section>

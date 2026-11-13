@@ -37,10 +37,9 @@ export function WorkIndex() {
   return (
     <section id="work" className="section work" data-tone="light" aria-labelledby="work-title">
       <div className="wrap">
-        <SectionHead index="01" eyebrow={t.work.eyebrow} id="work-title">
+        <SectionHead index="01" eyebrow={t.work.eyebrow} id="work-title" intro={t.work.intro}>
           {t.work.title}
         </SectionHead>
-        <p className="work__intro reveal">{t.work.intro}</p>
 
         <div className="work__layout">
           <ol className="work__list">
@@ -70,6 +69,12 @@ export function WorkIndex() {
               );
             })}
           </ol>
+
+          <div className="work__more">
+            <Link href={href(routePath({ name: 'services', lang }))} className="btn">
+              {t.services.explore} <span className="btn__arrow"><Icon name="arrow-right" size={16} /></span>
+            </Link>
+          </div>
 
           <div className="work__panel" aria-hidden="true">
             <div className="work__sticky">

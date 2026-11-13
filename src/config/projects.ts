@@ -9,6 +9,10 @@ import type { Project } from '../types/content.ts';
  *  3. Run `npm run dev` — responsive AVIF/WebP versions are generated
  *     automatically into public/generated/ (git-ignored).
  *
+ *  `discipline`: 'design' | 'development' (DAM) | 'systems' (ASIR).
+ *  Technical projects can add `sections[].code` (editorial code excerpts)
+ *  and `sections[].diagrams` (architecture / network images).
+ *
  *  Only published projects belong here. Private / unpublished work
  *  (e.g. Projecte_Morph.png) must NOT be listed.
  * ─────────────────────────────────────────────────────────────────────
@@ -22,6 +26,7 @@ export const projects: Project[] = [
   {
     slug: 'porsche-911',
     title: 'Porsche 911',
+    discipline: 'design',
     category: REDESIGN,
     type: ACADEMIC,
     year: null,
@@ -44,6 +49,7 @@ export const projects: Project[] = [
   {
     slug: 'mwc',
     title: 'MWC',
+    discipline: 'design',
     category: WEB,
     type: ACADEMIC,
     year: null,
@@ -64,9 +70,10 @@ export const projects: Project[] = [
     brandConcept: 'MWC / GSMA',
   },
   {
-    slug: 'formula-one',
-    title: 'Formula One',
-    category: REDESIGN,
+    slug: 'quantex-labs',
+    title: 'QUANTEX Labs',
+    discipline: 'design',
+    category: WEB,
     type: ACADEMIC,
     year: null,
     summary: {
@@ -74,12 +81,20 @@ export const projects: Project[] = [
       en: 'Case study in preparation.',
       es: 'Caso de estudio en preparación.',
     },
-    cover: null, // ASSET PENDING — add the image to src/media/projectes/
-    brandConcept: 'Formula One',
+    cover: {
+      file: 'Projecte_QUANTEXLabs.png',
+      width: 1280,
+      height: 4694,
+      alt: {
+        en: 'Full-page design for QUANTEX Labs, a fictional financial-intelligence company: dark hero with a 3D figure, solutions grid, data-to-decisions process, industries, insights and closing call to action.',
+        es: 'Diseño de página completa para QUANTEX Labs, una empresa ficticia de inteligencia financiera: hero oscuro con figura 3D, cuadrícula de soluciones, proceso de datos a decisiones, sectores, artículos y llamada a la acción final.',
+      },
+    },
   },
   {
     slug: 'audi',
     title: 'Audi',
+    discipline: 'design',
     category: WEB,
     type: ACADEMIC,
     year: null,
@@ -102,6 +117,7 @@ export const projects: Project[] = [
   {
     slug: 'nadie-dice-nada',
     title: 'Nadie Dice Nada',
+    discipline: 'design',
     category: WEB,
     type: { en: 'Personal Project', es: 'Proyecto personal' },
     year: null,
@@ -110,7 +126,15 @@ export const projects: Project[] = [
       en: 'Case study in preparation.',
       es: 'Caso de estudio en preparación.',
     },
-    cover: null, // ASSET PENDING
+    cover: {
+      file: 'Projecte_NADIEDICENADA.png',
+      width: 1728,
+      height: 5774,
+      alt: {
+        en: 'Full-page design for Nadie Dice Nada: editorial title, colour-blocked cast cards, show sections, panel list, 2025 live shows and footer with oversized wordmark.',
+        es: 'Diseño de página completa para Nadie Dice Nada: título editorial, tarjetas de colores del elenco, secciones del programa, lista de la mesa, shows en vivo de 2025 y pie con el nombre a gran escala.',
+      },
+    },
   },
 ];
 

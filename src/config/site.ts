@@ -22,9 +22,9 @@ export const site = {
 
   social: [
     { id: 'email', label: 'Email', href: null }, // 'mailto:you@domain.com' — PENDING
+    { id: 'instagram', label: 'Instagram', href: null }, // 'https://www.instagram.com/…' — PENDING
     { id: 'linkedin', label: 'LinkedIn', href: null }, // 'https://www.linkedin.com/in/…' — PENDING
     { id: 'github', label: 'GitHub', href: null }, // 'https://github.com/…' — PENDING
-    { id: 'instagram', label: 'Instagram', href: null, optional: true }, // only if you want it listed
   ] satisfies SocialLink[] as SocialLink[],
 
   seo: {

@@ -46,6 +46,9 @@ export function headFor(route: Route): HeadData {
       };
     }
   }
+  if (route.name === 'services') {
+    return { ...base, title: `${t.services.title} · ${site.name}`, description: t.services.description };
+  }
   if (route.name === 'legal') {
     const doc = legal[route.slug];
     return { ...base, title: `${doc.title[lang]} · ${site.name}`, description: doc.intro[lang] };

@@ -10,6 +10,7 @@ import { existsSync, mkdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { projects } from '../src/config/projects.ts';
+import { services, workCategories } from '../src/config/services.ts';
 import type { ProjectImage } from '../src/types/content.ts';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -20,11 +21,15 @@ const stem = (f: string) => f.replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9_-]+
 
 mkdirSync(OUT, { recursive: true });
 
-const images: ProjectImage[] = projects.flatMap((p) => [
-  ...(p.cover ? [p.cover] : []),
-  ...(p.gallery ?? []),
-  ...(p.sections ?? []).flatMap((s) => s.images ?? []),
-]);
+const images: ProjectImage[] = [
+  ...projects.flatMap((p) => [
+    ...(p.cover ? [p.cover] : []),
+    ...(p.gallery ?? []),
+    ...(p.sections ?? []).flatMap((s) => [...(s.images ?? []), ...(s.diagrams ?? [])]),
+  ]),
+  ...services.flatMap((s) => s.media.flatMap((m) => (m.image ? [m.image] : []))),
+  ...workCategories.flatMap((c) => c.projects.flatMap((p) => (p.image ? [p.image] : []))),
+];
 
 const fresh = (out: string, src: string) => existsSync(out) && statSync(out).mtimeMs >= statSync(src).mtimeMs;
 

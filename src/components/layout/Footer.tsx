@@ -45,10 +45,13 @@ export function Footer() {
     { label: t.footer.projects, to: href(home, 'work') },
     { label: t.nav.experience, to: href(home, 'experience') },
     { label: t.nav.contact, to: href(home, 'contact') },
+    { label: t.services.title, to: href(routePath({ name: 'services', lang })) },
   ];
   // Only platforms with a real profile URL are listed (never placeholders here).
-  const social = site.social.filter((s) => s.id !== 'email' && s.href);
-  const email = site.social.find((s) => s.id === 'email')?.href ?? null;
+  // Social media is the primary contact channel. Order follows the brief.
+  // A platform without a confirmed URL renders as a marked, non-interactive row.
+  const ORDER = ['instagram', 'linkedin', 'github'] as const;
+  const social = ORDER.map((id) => site.social.find((s) => s.id === id)).filter((s) => s !== undefined);
 
   return (
     <footer ref={ref} className="site-footer" data-tone="black">
@@ -58,30 +61,44 @@ export function Footer() {
           <span>{site.brand} — {t.footer.signature}</span>
           <span className="site-footer__progress" role="presentation" aria-hidden="true" title={t.footer.progress}><span /></span>
           <a href="#top" className="site-footer__top">
-            {t.footer.status} <span aria-hidden="true">·</span> {t.footer.top} <Icon name="arrow-up" size={12} />
+            <span className="site-footer__status" aria-hidden="true">{t.footer.status} ·</span>
+            <span>{t.footer.top}</span>
+            <Icon name="arrow-up" size={12} />
           </a>
         </div>
 
         <div className="site-footer__main">
-          {/* Contact block (replaces a newsletter: no fake forms) */}
+          {/* LET'S TALK — social media only (no email, no forms) */}
           <section className="site-footer__contact" aria-labelledby="footer-contact">
             <p className="site-footer__eyebrow label">{t.footer.eyebrow}</p>
             <h2 id="footer-contact" className="site-footer__title display">{t.footer.title}</h2>
-            {email ? (
-              <a className="site-footer__field" href={email}>
-                <span className="site-footer__field-text">{email.replace(/^mailto:/, '')}</span>
-                <span className="site-footer__field-cta">
-                  <span className="sr-only">{t.footer.emailCta}</span>
-                  <Icon name="arrow-ne" size={22} />
-                </span>
-              </a>
-            ) : (
-              <div className="site-footer__field is-pending" aria-disabled="true">
-                <span className="site-footer__field-text">{t.footer.emailPending}</span>
-                <span className="pending">Pending</span>
-              </div>
-            )}
-            <span className="site-footer__field-line" aria-hidden="true" />
+            <p className="site-footer__message">{t.footer.message}</p>
+            <ul className="site-footer__channels">
+              {social.map((s, i) => {
+                const inner = (
+                  <>
+                    <span className="site-footer__channel-num label num" aria-hidden="true">0{i + 1}</span>
+                    <span className="site-footer__channel-icon" aria-hidden="true"><Icon name={s.id} size={20} /></span>
+                    <span className="site-footer__channel-label">{s.label}</span>
+                    {s.href
+                      ? <span className="site-footer__channel-cta" aria-hidden="true"><Icon name="arrow-ne" size={20} /></span>
+                      : <span className="pending">Pending</span>}
+                  </>
+                );
+                return (
+                  <li key={s.id}>
+                    {s.href ? (
+                      <a className="site-footer__channel" href={s.href} target="_blank" rel="noopener noreferrer">
+                        {inner}
+                        <span className="sr-only"> ({t.a11y.external})</span>
+                      </a>
+                    ) : (
+                      <span className="site-footer__channel is-pending" aria-disabled="true" title={t.a11y.pending}>{inner}</span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </section>
 
           <nav className="site-footer__col" aria-labelledby="footer-links">
@@ -93,24 +110,6 @@ export function Footer() {
             </ul>
           </nav>
 
-          {(social.length > 0 || import.meta.env.DEV) && (
-            <div className="site-footer__col">
-              <h2 className="site-footer__eyebrow label">{t.footer.social}</h2>
-              {social.length > 0 ? (
-                <ul className="site-footer__social">
-                  {social.map((s) => (
-                    <li key={s.id}>
-                      <a href={s.href!} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (${t.a11y.external})`} className="site-footer__icon">
-                        <Icon name={s.id} size={22} />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <span className="pending">Dev only: add URLs in site.ts</span>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Legal bar */}

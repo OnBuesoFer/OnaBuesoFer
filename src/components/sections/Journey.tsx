@@ -9,15 +9,14 @@ export function Experience() {
   return (
     <section id="experience" className="section journey" data-tone="dark" aria-labelledby="exp-title">
       <div className="wrap">
-        <SectionHead index="03" eyebrow={t.experience.eyebrow} id="exp-title">{t.experience.title}</SectionHead>
-        <ol className="timeline">
+        <SectionHead index="04" eyebrow={t.experience.eyebrow} id="exp-title">{t.experience.title}</SectionHead>
+        <ol className="rows">
           {experience.map((e, i) => (
-            <li key={e.company} className="timeline__row reveal" style={{ ['--d' as string]: `${i * 80}ms` }}>
-              <span className="timeline__period label num">{e.period}</span>
-              <h3 className="timeline__company display">{e.company}</h3>
-              <p className="timeline__role">{l(e.role)}</p>
-              {e.description && <p className="timeline__desc">{l(e.description)}</p>}
-              <span className="timeline__node" aria-hidden="true" />
+            <li key={e.company} className="row reveal" style={{ ['--d' as string]: `${i * 80}ms` }}>
+              <span className="row__meta label num">{e.period}</span>
+              <h3 className="row__title display">{e.company}</h3>
+              <p className="row__aside">{l(e.role)}</p>
+              {e.description && <p className="row__desc">{l(e.description)}</p>}
             </li>
           ))}
         </ol>
@@ -26,32 +25,24 @@ export function Experience() {
   );
 }
 
-/** Education — numbered list, no invented institutions or dates. */
+/** Education — the same row pattern as Experience. No invented institutions or dates. */
 export function Education() {
   const t = useT();
   const l = useL();
   return (
     <section id="education" className="section journey journey--tight" data-tone="dark" aria-labelledby="edu-title">
       <div className="wrap">
-        <SectionHead index="04" eyebrow={t.education.eyebrow} id="edu-title">{t.education.title}</SectionHead>
-        <ol className="edu">
+        <SectionHead index="05" eyebrow={t.education.eyebrow} id="edu-title">{t.education.title}</SectionHead>
+        <ol className="rows">
           {education.map((e, i) => (
-            <li key={i} className="edu__item reveal" style={{ ['--d' as string]: `${i * 80}ms` }}>
-              <span className="edu__num display num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="edu__title">{l(e.title)}</h3>
-              {e.specialization && (
-                <p className="edu__spec label">
-                  <span className="px" aria-hidden="true" /> {t.education.specialization}: {l(e.specialization)}
-                </p>
-              )}
-              {e.status && (
-                <p className="edu__spec label">
-                  <span className="px" aria-hidden="true" /> {l(e.status)}
-                </p>
-              )}
-              {(e.institution || e.period) && (
-                <p className="label label--muted">{[e.institution, e.period].filter(Boolean).join(' · ')}</p>
-              )}
+            <li key={i} className="row reveal" style={{ ['--d' as string]: `${i * 80}ms` }}>
+              <span className="row__meta label num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="row__title row__title--s display">{l(e.title)}</h3>
+              <p className="row__aside">
+                {e.status && <span className="row__tag label">{l(e.status)}</span>}
+                {e.specialization && <span>{t.education.specialization}: {l(e.specialization)}</span>}
+                {(e.institution || e.period) && <span>{[e.institution, e.period].filter(Boolean).join(' · ')}</span>}
+              </p>
             </li>
           ))}
         </ol>
@@ -60,36 +51,40 @@ export function Education() {
   );
 }
 
-/** Awards & Events — subtle editorial index side by side. */
+/** Awards & Events — two quiet sub-sections on the same axis. */
 export function Recognition() {
   const t = useT();
   const l = useL();
   return (
     <section id="recognition" className="section journey journey--tight" data-tone="dark" aria-label={`${t.awards.title} · ${t.events.title}`}>
       <div className="wrap recog">
-        <div className="recog__col">
-          <h2 className="recog__head label"><span className="num">05</span> <span className="label--muted">{t.awards.title}</span></h2>
-          <ul className="recog__list">
+        <div className="subsec">
+          <h2 className="subsec__meta label"><span className="num">06</span> <span className="label--muted">{t.awards.title}</span></h2>
+          <ul className="rows rows--compact">
             {awards.map((a) => (
-              <li key={a.name} className="recog__item reveal">
-                <span className="recog__name display">{a.name}</span>
-                <span className="recog__detail">{l(a.detail)}</span>
-                {import.meta.env.DEV && a.toConfirm && <span className="pending">To confirm: {l(a.toConfirm)}</span>}
+              <li key={a.name} className="row reveal">
+                <span className="row__title row__title--s display">{a.name}</span>
+                <span className="row__aside">
+                  {l(a.detail)}
+                  {import.meta.env.DEV && a.toConfirm && <span className="pending">To confirm: {l(a.toConfirm)}</span>}
+                </span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="recog__col">
-          <h2 className="recog__head label"><span className="num">06</span> <span className="label--muted">{t.events.title}</span></h2>
-          <p className="recog__intro">{t.events.intro}</p>
-          <ul className="recog__list">
-            {events.map((e) => (
-              <li key={e.name} className="recog__item reveal">
-                <span className="recog__name display">{e.name}</span>
-                <span className="recog__detail">{l(e.full)}{e.place ? ` — ${e.place}` : ''}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="subsec">
+          <h2 className="subsec__meta label"><span className="num">07</span> <span className="label--muted">{t.events.title}</span></h2>
+          <div>
+            <p className="subsec__intro">{t.events.intro}</p>
+            <ul className="rows rows--compact">
+              {events.map((e) => (
+                <li key={e.name} className="row reveal">
+                  <span className="row__title row__title--s display">{e.name}</span>
+                  <span className="row__aside">{l(e.full)}{e.place ? ` — ${e.place}` : ''}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

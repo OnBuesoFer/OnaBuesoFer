@@ -79,6 +79,17 @@ export function Header() {
                 </li>
               ))}
               <li>
+                <Link
+                  href={href(routePath({ name: 'services', lang }))}
+                  className={`site-nav__link ${route.name === 'services' ? 'is-active' : ''}`}
+                  aria-current={route.name === 'services' ? 'page' : undefined}
+                  onClick={close}
+                >
+                  <span className="site-nav__num num" aria-hidden="true">0{SECTIONS.length + 1}</span>
+                  <span>{t.services.nav}</span>
+                </Link>
+              </li>
+              <li>
                 <button type="button" className="site-nav__play" onClick={() => { close(); game.open(); }} aria-haspopup="dialog">
                   <span className="px" aria-hidden="true" />
                   {t.nav.play}

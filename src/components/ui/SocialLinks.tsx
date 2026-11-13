@@ -1,21 +1,24 @@
 import { site } from '../../config/site.ts';
+import type { SocialLink } from '../../types/content.ts';
 import { useT } from '../../lib/i18n.tsx';
 import { Icon } from './Icon.tsx';
 
 interface Props {
   variant?: 'inline' | 'stack' | 'big';
   className?: string;
+  /** Channels to leave out (e.g. ['email'] on social-first sections). */
+  exclude?: SocialLink['id'][];
 }
 
 /**
  * Email / LinkedIn / GitHub. Links without a confirmed destination render
  * as a non-interactive "PENDING" placeholder — never as a fake URL.
  */
-export function SocialLinks({ variant = 'inline', className = '' }: Props) {
+export function SocialLinks({ variant = 'inline', className = '', exclude = [] }: Props) {
   const t = useT();
   return (
     <ul className={`social social--${variant} ${className}`}>
-      {site.social.filter((s) => s.href || !s.optional).map((s) => {
+      {site.social.filter((s) => (s.href || !s.optional) && !exclude.includes(s.id)).map((s) => {
         const label = s.id === 'email' && variant === 'big' ? t.contact.email : s.label;
         const content = (
           <>

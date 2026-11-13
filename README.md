@@ -6,7 +6,7 @@ A bilingual (EN / ES) portfolio built around one idea: **from visual expression 
 The site starts as an editorial, paper-like surface (art) and turns into a deep-green technical
 environment (technology) as you scroll.
 
-- **Quantize** (hero): an organic ink field that snaps into a pixel grid under the cursor/finger and as you scroll.
+- **System blueprint** (hero): a static DAM/ASIR architecture drawing — app, load balancer, APIs, SQL table mapping, firewall, switch, server rack — with a fixed code-matrix block. No motion, no scroll or pointer effects.
 - **Paper → Screen bridge**: a stepped pixel field that fills as the page crosses from art to technology.
 - **Selected Work**: an editorial index; each project previews its full page design inside a scrolling frame.
 - **Designer Survival**: an optional arcade mini-game behind **PLAY?** (60-second "iteration", keyboard + touch, sound with mute, local best score).
@@ -20,12 +20,12 @@ environment (technology) as you scroll.
 | UI | React 19 + TypeScript (strict) |
 | Build | Vite 8 — client build + SSR build → static pre-rendering of every route |
 | Styling | Modern CSS with design tokens (custom properties), no CSS framework |
-| Interaction | Canvas 2D (Quantize, game), SVG (diagram, icons), CSS animations, View Transitions |
+| Interaction | Canvas 2D (hero blueprint, game), SVG (diagram, icons), CSS animations, View Transitions |
 | Images | `sharp` → responsive AVIF/WebP generated from the originals at build time |
 
 No routing, animation or state libraries: the router is ~110 lines, scroll effects write a single CSS
 variable, and the canvas engines are framework-agnostic TypeScript classes. GSAP and Framer Motion
-were evaluated and not needed. Main bundle ≈ 84 kB gzip (mostly React); the Quantize engine (~3 kB)
+were evaluated and not needed. Main bundle ≈ 84 kB gzip (mostly React); the hero blueprint (~3 kB)
 and the game (~6 kB) are separate chunks loaded on demand.
 
 ## Getting started
@@ -53,6 +53,8 @@ npm run dev        # http://localhost:5173 — also generates responsive images
 | Email, LinkedIn, GitHub, location, availability, SEO | `src/config/site.ts` |
 | Projects (add / edit / reorder) | `src/config/projects.ts` |
 | Experience, education, awards, events | `src/config/profile.ts` |
+| Disciplines (Art & UX/UI · DAM · ASIR) and their truthful status | `src/config/disciplines.ts` |
+| Privacy Policy / Legal Notice text | `src/config/legal.ts` |
 | All interface copy (EN + ES) | `src/config/i18n.ts` |
 | Design tokens (colour, type, spacing, motion) | `src/css/tokens.css` |
 | Logo & favicon | `src/media/geminisobfFavicon.svg` (used as-is; replace the file to rebrand, then `npm run og`) |
@@ -70,10 +72,11 @@ Values set to `null` render as visible **PENDING** markers, never as fake links.
   title: 'My Project',
   category: { en: 'Web Design', es: 'Diseño web' },
   type: { en: 'Personal Project', es: 'Proyecto personal' },
+  discipline: 'development',        // 'design' | 'development' (DAM) | 'systems' (ASIR)
   year: 2026,                       // or null until confirmed
   summary: { en: '…', es: '…' },
   cover: { file: 'My_Project.png', width: 1920, height: 4000, alt: { en: '…', es: '…' } },
-  // optional: sections, gallery (desktop/mobile mockups), credits, brandConcept
+  // optional: sections (with images, diagrams, code excerpts), gallery, credits, brandConcept
 },
 ```
 
@@ -93,7 +96,7 @@ src/
   config/                  ← all content (site, projects, profile, i18n)
   types/                   content model
   css/                     tokens, fonts, base + one stylesheet per area
-  js/quantize/engine.ts    Quantize field (Canvas 2D)
+  js/blueprint/blueprint.ts  static hero system blueprint (Canvas 2D, renders on resize only)
   js/game/engine.ts        Designer Survival (Canvas 2D + Web Audio)
   components/              layout · sections · work · ui · game
   pages/                   Home, Project (case study), 404
@@ -138,7 +141,7 @@ Open Graph tags (LinkedIn needs absolute image URLs) and `sitemap.xml` are corre
 
 - Semantic landmarks, skip link, one `h1` per page, visible focus states (ink on paper, green on deep).
 - Green is used as text only on dark surfaces (8.6:1); on paper it is a fill behind black text (11.6:1).
-- `prefers-reduced-motion`: static Quantize frame, no intro, no pans, instant transitions.
+- `prefers-reduced-motion`: no intro, no pans, instant transitions (the hero blueprint is always static).
 - Canvas loops pause off-screen and in background tabs; DPR capped at 2.
 - Images have intrinsic sizes (no layout shift), AVIF/WebP, lazy loading; fonts use `font-display: swap`
   with metric-adjusted fallbacks.

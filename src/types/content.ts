@@ -29,16 +29,31 @@ export interface ProjectImage {
   alt: Localized;
 }
 
+/** Editorial code excerpt for development / systems / data projects. */
+export interface CodeBlock {
+  language: string; // e.g. 'sql', 'bash', 'python' — shown as a label only
+  content: string;
+  caption?: Localized;
+}
+
 export interface CaseSection {
-  /** Overview, Context, Challenge, Design approach, UX/UI process, Design system… */
+  /** Overview, Context, Challenge, Design approach, UX/UI process, Design system,
+   *  Architecture, Infrastructure, Results… */
   title: Localized;
   body: Localized;
   images?: ProjectImage[];
+  /** Diagrams (network, architecture, data flow) — SVG/PNG in src/media/projectes/. */
+  diagrams?: ProjectImage[];
+  code?: CodeBlock[];
 }
+
+/** Which discipline a project belongs to: design (UX/UI), development (DAM) or systems (ASIR). */
+export type ProjectDiscipline = 'design' | 'development' | 'systems';
 
 export interface Project {
   slug: string;
   title: string;
+  discipline: ProjectDiscipline;
   category: Localized;
   type: Localized;
   /** Only shown once confirmed. */

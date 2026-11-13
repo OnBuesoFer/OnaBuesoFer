@@ -5,11 +5,8 @@ export function Contact() {
   const t = useT();
   return (
     <section id="contact" className="section contact" data-tone="dark" aria-labelledby="contact-title">
-      <div className="contact__pixels" aria-hidden="true">
-        {Array.from({ length: 14 }, (_, i) => <span key={i} style={{ ['--i' as string]: i }} />)}
-      </div>
       <div className="wrap">
-        <p className="contact__eyebrow label"><span className="num">07</span> <span className="label--muted">{t.contact.eyebrow}</span></p>
+        <p className="contact__eyebrow label"><span className="num">08</span> <span className="label--muted">{t.contact.eyebrow}</span></p>
         <h2 id="contact-title" className="contact__title display reveal">
           {t.contact.title.map((line, i) => (
             <span key={i} className={`contact__line contact__line--${i}`}>{i === 1 ? <em>{line}</em> : line} </span>

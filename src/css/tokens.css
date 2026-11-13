@@ -41,9 +41,32 @@
   --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
   --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4rem;
   --s-9: 6rem; --s-10: 8rem; --s-11: 12rem;
-  --section-y: clamp(5rem, 3rem + 9vw, 12rem);
+  --section-y: clamp(5rem, 3rem + 9vw, 12rem);   /* between sections */
 
-  /* Grid */
+  /* Vertical rhythm inside a section (use these, not raw --s-*) */
+  --stack-xs: var(--s-2);   /* label ↔ value */
+  --stack-s: var(--s-4);    /* paragraph ↔ paragraph, list items */
+  --stack-m: var(--s-6);    /* heading ↔ body, body ↔ action */
+  --stack-l: var(--s-8);    /* section head ↔ content */
+  --stack-xl: var(--s-10);  /* sub-section ↔ sub-section */
+
+  /* Reading measures — the only text widths in the system */
+  --measure-xs: 24ch;  /* short statements next to large type */
+  --measure-s: 36ch;   /* intros, leads */
+  --measure-m: 52ch;   /* secondary paragraphs */
+  --measure-l: 66ch;   /* long-form body (case studies, legal) */
+
+  /* Optical offset: aligns a small label with the cap height of display type */
+  --cap-offset: 0.6em;
+
+  /* Fixed UI dimensions */
+  --hit: 44px;          /* minimum touch target */
+  --logo-h: 44px;
+  --logo-h-sm: 38px;
+  --tick: 6px;          /* brand pixel / small markers */
+
+  /* Grid — one 12-column grid for every page.
+     Editorial axis: columns 1–3 hold labels/meta, content starts at column 4. */
   --cols: 12;
   --gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
   --margin: clamp(1rem, 0.4rem + 2.8vw, 3.5rem);
