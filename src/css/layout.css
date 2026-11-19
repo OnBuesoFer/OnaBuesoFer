@@ -198,7 +198,7 @@ a.site-footer__channel:focus-visible .site-footer__channel-cta { width: calc(var
 }
 .js .site-footer__sig.reveal { opacity: 1; transform: none; }
 .js .site-footer__sig.reveal span { transform: translateY(40%); }
-.js .site-footer__sig.reveal.is-in span { transform: none; transition: transform 1s var(--ease-out); }
+.js .site-footer__sig.reveal[data-in] span { transform: none; transition: transform 1s var(--ease-out); }
 
 @media (max-width: 1023px) {
   .site-footer__bar { grid-template-columns: 1fr auto; grid-template-areas: 'line line' 'l r'; }

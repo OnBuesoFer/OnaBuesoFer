@@ -68,6 +68,8 @@ npm run dev        # also generates the responsive images
 | Social links, SEO, site settings | `src/config/site.ts` |
 | Selected Work projects | `src/config/projects.ts` |
 | Services, service photos, additional work | `src/config/services.ts` |
+| Creative Projects & Exploration — Projects & Services page (4 projects, «+» descriptions) | `src/config/creative.ts` |
+| Graphic design gallery (projects with several images) | `src/config/graphic.ts` |
 | Experience, education, awards, events | `src/config/profile.ts` |
 | Disciplines and their status | `src/config/disciplines.ts` |
 | Privacy Policy / Legal Notice | `src/config/legal.ts` |

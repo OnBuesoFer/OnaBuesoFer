@@ -171,7 +171,7 @@ p { text-wrap: pretty; }
 
 /* Reveal on scroll (progressive: content is visible without JS) */
 .js .reveal { opacity: 0; transform: translateY(24px); }
-.js .reveal.is-in {
+.js .reveal[data-in] {
   opacity: 1; transform: none;
   transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out);
   transition-delay: var(--d, 0ms);

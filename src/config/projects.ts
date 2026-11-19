@@ -19,6 +19,8 @@ import type { Project } from '../types/content.ts';
  */
 
 const ACADEMIC = { en: 'Academic / Personal Project', es: 'Proyecto académico / personal' };
+const ACADEMIC_ONLY = { en: 'Academic Project', es: 'Proyecto académico' };
+const PERSONAL = { en: 'Personal Project', es: 'Proyecto personal' };
 const REDESIGN = { en: '(Re)Design Web', es: '(Re)Diseño web' };
 const WEB = { en: 'Web Design', es: 'Diseño web' };
 
@@ -51,7 +53,7 @@ export const projects: Project[] = [
     title: 'MWC',
     discipline: 'design',
     category: WEB,
-    type: ACADEMIC,
+    type: ACADEMIC_ONLY,
     year: null,
     summary: {
       draft: true,
@@ -74,7 +76,7 @@ export const projects: Project[] = [
     title: 'QUANTEX Labs',
     discipline: 'design',
     category: WEB,
-    type: ACADEMIC,
+    type: PERSONAL,
     year: null,
     summary: {
       draft: true,
@@ -119,7 +121,7 @@ export const projects: Project[] = [
     title: 'Nadie Dice Nada',
     discipline: 'design',
     category: WEB,
-    type: { en: 'Personal Project', es: 'Proyecto personal' },
+    type: PERSONAL,
     year: null,
     summary: {
       draft: true,

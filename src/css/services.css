@@ -129,3 +129,63 @@
   .svc-work__items { grid-template-columns: 1fr; }
   .svc-contact__line:nth-child(2) { padding-left: 0; }
 }
+
+/* ── Graphic design gallery ────────────────────────────────────────
+   Images lead: equal 4:5 covers (cropped only in the card, never in the
+   viewer), generous gutters, quiet meta below. ───────────────────── */
+.gfx { padding-top: 0; }
+.gfx__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--stack-l) var(--gutter); }
+.gfx__item { display: grid; align-content: start; }
+.gfx__card { display: grid; gap: 0; text-align: left; width: 100%; }
+.gfx__media { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid var(--fg); background: var(--paper); }
+.gfx__img, .gfx__img img { width: 100%; height: 100%; }
+.gfx__img img { object-fit: cover; transition: transform var(--t-slow) var(--ease-out); }
+.gfx__view {
+  position: absolute; left: var(--s-3); bottom: var(--s-3);
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: var(--s-2) var(--s-3); background: var(--green); color: var(--ink);
+  opacity: 0; transform: translateY(var(--s-2));
+  transition: opacity var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out);
+}
+.gfx__card:hover .gfx__img img, .gfx__card:focus-visible .gfx__img img { transform: scale(1.03); }
+.gfx__card:hover .gfx__view, .gfx__card:focus-visible .gfx__view { opacity: 1; transform: none; }
+@media (hover: none) { .gfx__view { opacity: 1; transform: none; } } /* always visible on touch */
+.gfx__meta { display: flex; justify-content: space-between; align-items: baseline; gap: var(--stack-s); padding-block: var(--stack-s) var(--stack-xs); border-bottom: 1px solid var(--line); }
+.gfx__title { font-size: var(--fs-m); font-weight: 500; letter-spacing: -0.01em; }
+.gfx__title.is-pending { color: var(--muted); }
+.gfx__desc { display: block; padding-top: var(--stack-xs); color: var(--muted); font-size: var(--fs-s); max-width: var(--measure-s); }
+.gfx__media--empty {
+  display: grid; place-items: center; border-color: var(--line);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 24px 24px;
+}
+
+/* Viewer (native <dialog>: focus trap, Esc, focus return) */
+.viewer {
+  width: min(100vw - 2 * var(--margin), 1200px); max-height: calc(100dvh - 2 * var(--s-5));
+  margin: auto; padding: var(--s-4);
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: var(--stack-s);
+  border: 1px solid var(--line); background: var(--deep); color: var(--paper);
+}
+.viewer:not([open]) { display: none; }
+.viewer::backdrop { background: rgb(0 0 0 / 0.86); }
+.viewer[open] { animation: dlg-in var(--t-base) var(--ease-out); }
+.viewer__head { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: var(--stack-s); }
+.viewer__title { font-size: var(--fs-m); font-weight: 500; }
+.viewer__stage { min-height: 0; display: grid; place-items: center; touch-action: pan-y; }
+.viewer__img { display: contents; }
+.viewer__img img { max-width: 100%; max-height: calc(100dvh - 15rem); width: auto; height: auto; object-fit: contain; animation: fade-in var(--t-base) var(--ease-out); }
+@keyframes fade-in { from { opacity: 0; } }
+.viewer__nav { display: flex; align-items: center; justify-content: center; gap: var(--stack-s); }
+.viewer__dots { display: flex; gap: var(--s-2); }
+.viewer__dots li { width: var(--tick); height: var(--tick); border: 1px solid var(--green); }
+.viewer__dots li.is-on { background: var(--green); }
+.viewer__desc { color: var(--deep-muted); max-width: var(--measure-l); font-size: var(--fs-s); }
+
+@media (max-width: 1023px) { .gfx__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) {
+  .gfx__grid { grid-template-columns: 1fr; }
+  .viewer { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; padding: var(--s-3); border: 0; }
+  .viewer__img img { max-height: calc(100dvh - 13rem); }
+}

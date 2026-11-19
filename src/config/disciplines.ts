@@ -54,7 +54,7 @@ export const disciplines: Discipline[] = [
     code: 'ASIR',
     name: { en: 'Systems & Networks', es: 'Sistemas y redes' },
     full: { en: 'Networked Computer Systems Administration', es: 'Administración de Sistemas Informáticos en Red' },
-    status: ['interest'], // update to 'studying' / 'completed' only if confirmed
+    status: ['studying'], // Education 03 — ASIR, in progress
     areas: [
       { en: 'Linux & Windows server administration', es: 'Administración de servidores Linux y Windows' },
       { en: 'Networks & infrastructure', es: 'Redes e infraestructura' },

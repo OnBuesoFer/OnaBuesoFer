@@ -115,8 +115,8 @@ export const services: Service[] = [
     code: 'DD',
     name: { en: 'Digital Design', es: 'Diseño digital' },
     statement: {
-      en: 'Visual identities and digital solutions that communicate with clarity and coherence, from the brand concept to every piece that brings the project to life.',
-      es: 'Identidades visuales y soluciones digitales que comunican con claridad y coherencia, desde el concepto de marca hasta cada pieza que da vida al proyecto.',
+      en: 'I design digital experiences and visual identities where aesthetics and technical feasibility go hand in hand. I create robust brands and intuitive products — from strategic concept to final implementation — paying close attention to every user touchpoint.',
+      es: 'Diseño experiencias digitales e identidades visuales donde la estética y la viabilidad técnica van de la mano. Creo marcas sólidas y productos intuitivos pensados desde el concepto estratégico hasta su implementación real, cuidando cada punto de contacto con el usuario.',
     },
     offerings: [
       { en: 'Graphic design', es: 'Diseño gráfico' },

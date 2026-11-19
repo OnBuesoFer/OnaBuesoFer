@@ -7,6 +7,8 @@ import { MediaSlot } from '../components/ui/MediaSlot.tsx';
 import { ProjectPicture } from '../components/ui/ProjectPicture.tsx';
 import { SectionHead } from '../components/ui/SectionHead.tsx';
 import { SocialLinks } from '../components/ui/SocialLinks.tsx';
+import { GraphicGallery } from '../components/sections/GraphicGallery.tsx';
+import { CreativeProjects } from '../components/sections/CreativeProjects.tsx';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -37,7 +39,7 @@ export function ServicesPage() {
       {/* 01 — Introduction */}
       <section className="svc-intro" data-tone="light" aria-labelledby="svc-title">
         <div className="wrap">
-          <Link href={href(home)} className="case__back label">
+          <Link href={href(home, 'work')} className="case__back label">
             <Icon name="arrow-left" size={14} /> {s.back}
           </Link>
           <div className="svc-intro__grid">
@@ -90,10 +92,16 @@ export function ServicesPage() {
         </div>
       </section>
 
-      {/* 03 — Additional work */}
+      {/* 03 — Graphic design gallery */}
+      <GraphicGallery index="03" />
+
+      {/* 04 — Creative projects & exploration */}
+      <CreativeProjects index="04" />
+
+      {/* 05 — Additional work */}
       <section id="more-work" className="section svc-work" data-tone="light" aria-labelledby="svc-work-title">
         <div className="wrap">
-          <SectionHead index="03" eyebrow={s.work.eyebrow} id="svc-work-title" intro={s.work.intro}>{s.work.title}</SectionHead>
+          <SectionHead index="05" eyebrow={s.work.eyebrow} id="svc-work-title" intro={s.work.intro}>{s.work.title}</SectionHead>
           <ol className="rows">
             {workCategories.map((c, i) => (
               <li key={c.id} className="row svc-work__row reveal">
@@ -127,11 +135,11 @@ export function ServicesPage() {
         </div>
       </section>
 
-      {/* 04 — Under construction */}
+      {/* 06 — Under construction */}
       <section className="section soon" data-tone="dark" aria-labelledby="soon-title">
         <div className="soon__grid" aria-hidden="true" />
         <div className="wrap soon__inner">
-          <p className="soon__meta label"><span className="num">04</span> <span className="label--muted">{s.soon.eyebrow}</span></p>
+          <p className="soon__meta label"><span className="num">06</span> <span className="label--muted">{s.soon.eyebrow}</span></p>
           <h2 id="soon-title" className="soon__title display">
             {s.soon.lines.map((line, i) => <span key={i} className={`soon__line soon__line--${i}`}>{i === 1 ? <em>{line}</em> : line} </span>)}
           </h2>
@@ -158,10 +166,10 @@ export function ServicesPage() {
         </div>
       </section>
 
-      {/* 05 — Contact (social media first) */}
+      {/* 07 — Contact (social media first) */}
       <section className="section contact svc-contact" data-tone="dark" aria-labelledby="svc-contact-title">
         <div className="wrap">
-          <p className="contact__eyebrow label"><span className="num">05</span> <span className="label--muted">{s.contact.eyebrow}</span></p>
+          <p className="contact__eyebrow label"><span className="num">07</span> <span className="label--muted">{s.contact.eyebrow}</span></p>
           <h2 id="svc-contact-title" className="svc-contact__title display">
             {s.contact.lines.map((line, i) => <span key={i} className="svc-contact__line">{i === 1 ? <em>{line}</em> : line} </span>)}
           </h2>

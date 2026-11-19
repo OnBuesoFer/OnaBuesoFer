@@ -9,7 +9,7 @@ export function Experience() {
   return (
     <section id="experience" className="section journey" data-tone="dark" aria-labelledby="exp-title">
       <div className="wrap">
-        <SectionHead index="04" eyebrow={t.experience.eyebrow} id="exp-title">{t.experience.title}</SectionHead>
+        <SectionHead index="04" eyebrow={t.experience.eyebrow} id="exp-title" intro={t.experience.intro}>{t.experience.title}</SectionHead>
         <ol className="rows">
           {experience.map((e, i) => (
             <li key={e.company} className="row reveal" style={{ ['--d' as string]: `${i * 80}ms` }}>
@@ -32,7 +32,7 @@ export function Education() {
   return (
     <section id="education" className="section journey journey--tight" data-tone="dark" aria-labelledby="edu-title">
       <div className="wrap">
-        <SectionHead index="05" eyebrow={t.education.eyebrow} id="edu-title">{t.education.title}</SectionHead>
+        <SectionHead index="05" eyebrow={t.education.eyebrow} id="edu-title" intro={t.education.intro}>{t.education.title}</SectionHead>
         <ol className="rows">
           {education.map((e, i) => (
             <li key={i} className="row reveal" style={{ ['--d' as string]: `${i * 80}ms` }}>

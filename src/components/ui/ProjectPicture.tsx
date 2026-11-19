@@ -9,14 +9,16 @@ interface Props {
   sizes?: string;
   className?: string;
   eager?: boolean;
+  /** Load immediately (normal priority) — for images revealed by interaction. */
+  preload?: boolean;
   decorative?: boolean;
 }
 
 /** AVIF → WebP → fallback, with intrinsic size to prevent layout shift. */
-export function ProjectPicture({ image, mode = 'full', sizes = '100vw', className, eager, decorative }: Props) {
+export function ProjectPicture({ image, mode = 'full', sizes = '100vw', className, eager, preload, decorative }: Props) {
   const l = useL();
   const alt = decorative ? '' : l(image.alt);
-  const loading = eager ? 'eager' : 'lazy';
+  const loading = eager || preload ? 'eager' : 'lazy';
   if (mode === 'poster') {
     return (
       <picture className={className}>

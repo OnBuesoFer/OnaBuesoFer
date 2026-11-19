@@ -9,7 +9,7 @@ import { SectionHead } from '../ui/SectionHead.tsx';
 import type { Project } from '../../types/content.ts';
 
 /** Scrolling "browser" frame that pans through a full-page design. */
-export function PageFrame({ project, active = true, path }: { project: Project; active?: boolean; path: string }) {
+export function PageFrame({ project, active = true, path, preload }: { project: Project; active?: boolean; path: string; preload?: boolean }) {
   const t = useT();
   return (
     <div className={`frame ${active ? 'is-active' : ''}`} style={{ ['--ratio' as string]: project.cover ? project.cover.height / project.cover.width : 1 }}>
@@ -19,7 +19,7 @@ export function PageFrame({ project, active = true, path }: { project: Project; 
       </div>
       <div className="frame__view">
         {project.cover ? (
-          <ProjectPicture image={project.cover} className="frame__img" sizes="(min-width: 1024px) 46vw, 92vw" decorative />
+          <ProjectPicture image={project.cover} className="frame__img" sizes="(min-width: 1024px) 46vw, 92vw" decorative preload={preload} />
         ) : (
           <PixelPlaceholder label={t.work.pending} seed={project.slug.length} />
         )}
@@ -78,13 +78,18 @@ export function WorkIndex() {
 
           <div className="work__panel" aria-hidden="true">
             <div className="work__sticky">
-              {projects.map((p, i) => (
-                <div key={p.slug} className={`work__slide ${active === i ? 'is-active' : ''}`}>
-                  <PageFrame project={p} active={active === i} path={`ona/work/${p.slug}`} />
-                </div>
-              ))}
+              <div className="work__stack">
+                {projects.map((p, i) => (
+                  <div key={p.slug} className={`work__slide ${active === i ? 'is-active' : ''}`}>
+                    <PageFrame project={p} active={active === i} path={`ona/work/${p.slug}`} />
+                  </div>
+                ))}
+              </div>
               <p className="work__caption label label--muted">
-                <span className="num">{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
+                <span>
+                  <span className="num">{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
+                  {' · '}<span className="work__caption-title">{projects[active]?.title}</span>
+                </span>
                 <span>{t.work.scroll}</span>
               </p>
             </div>

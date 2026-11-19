@@ -63,15 +63,38 @@ const RouterContext = createContext<RouterValue | null>(null);
 export function RouterProvider({ initialPath, children }: { initialPath: string; children: ReactNode }) {
   const [path, setPath] = useState(initialPath);
 
+  // Back/forward restore the exact scroll position of each history entry
+  // (the browser cannot do it reliably for client-rendered page swaps).
   useEffect(() => {
-    const onPop = () => setPath(window.location.pathname);
+    window.history.scrollRestoration = 'manual';
+    // Keep the current entry's scroll position up to date (debounced), so
+    // both back AND forward land where the visitor left each page.
+    let timer = 0;
+    const save = () => window.history.replaceState({ ...(window.history.state as object | null), y: window.scrollY }, '');
+    const onScroll = () => { window.clearTimeout(timer); timer = window.setTimeout(save, 120); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const onPop = (e: PopStateEvent) => {
+      window.clearTimeout(timer); // never write the old page's position into the new entry
+      const y = (e.state as { y?: number } | null)?.y;
+      setPath(window.location.pathname);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (typeof y === 'number') window.scrollTo({ top: y, behavior: 'instant' });
+        else if (window.location.hash) document.getElementById(decodeURIComponent(window.location.hash.slice(1)))?.scrollIntoView();
+      }));
+    };
     window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    return () => {
+      window.removeEventListener('popstate', onPop);
+      window.removeEventListener('scroll', onScroll);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   const navigate = useCallback((to: string) => {
     const url = new URL(to, window.location.href);
     const samePage = url.pathname === window.location.pathname;
+    // Remember where the visitor was, so "back" returns to the same spot.
+    window.history.replaceState({ ...(window.history.state as object | null), y: window.scrollY }, '');
     const go = () => {
       if (!samePage) {
         window.history.pushState({}, '', url.pathname + url.hash);

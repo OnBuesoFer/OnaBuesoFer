@@ -11,6 +11,8 @@ import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { projects } from '../src/config/projects.ts';
 import { services, workCategories } from '../src/config/services.ts';
+import { creativeProjects } from '../src/config/creative.ts';
+import { graphicProjects } from '../src/config/graphic.ts';
 import type { ProjectImage } from '../src/types/content.ts';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -29,6 +31,8 @@ const images: ProjectImage[] = [
   ]),
   ...services.flatMap((s) => s.media.flatMap((m) => (m.image ? [m.image] : []))),
   ...workCategories.flatMap((c) => c.projects.flatMap((p) => (p.image ? [p.image] : []))),
+  ...creativeProjects.flatMap((p) => (p.image ? [p.image] : [])),
+  ...graphicProjects.flatMap((p) => p.images),
 ];
 
 const fresh = (out: string, src: string) => existsSync(out) && statSync(out).mtimeMs >= statSync(src).mtimeMs;

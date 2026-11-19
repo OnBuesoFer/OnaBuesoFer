@@ -18,20 +18,27 @@ export const experience: ExperienceItem[] = [
 export const education: EducationItem[] = [
   {
     title: {
-      en: 'Higher Vocational Training in Graphic and Interactive Art & Design',
+      en: 'Higher Vocational Training Program in Visual Arts and Interactive Graphic Design',
       es: 'Ciclo Formativo de Grado Superior en Artes Plásticas y Diseño Gráfico Interactivo',
     },
   },
   {
     title: {
-      en: 'Higher Vocational Training in Multiplatform Application Development',
+      en: 'Higher Vocational Training Program in Multiplatform Application Development',
       es: 'Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Multiplataforma',
     },
-    status: { en: 'Doing', es: 'En curso' },
+    status: { en: 'In progress', es: 'En curso' },
   },
   {
     title: {
-      en: 'Certificate in Big Data and Artificial Intelligence Analysis',
+      en: 'Higher Vocational Training Program in Network Computer Systems Administration',
+      es: 'Ciclo Formativo de Grado Superior en Administración de Sistemas Informáticos en Red',
+    },
+    status: { en: 'In progress', es: 'En curso' },
+  },
+  {
+    title: {
+      en: 'Certificate in Big Data Analysis and Artificial Intelligence',
       es: 'Certificado en Análisis de Big Data e Inteligencia Artificial',
     },
   },

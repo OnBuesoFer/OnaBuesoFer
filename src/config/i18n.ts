@@ -24,9 +24,9 @@ const en = {
       'Static system blueprint: application, load balancer, API servers, an SQL table mapping, firewall, core switch and a server rack, with a code-matrix block.',
   },
   work: {
-    eyebrow: 'Selected work',
+    eyebrow: 'Projects',
     title: 'Selected Work',
-    intro: 'Web design and redesign concepts — from visual expression to digital experiences.',
+    intro: 'Graphic design concepts and web redesigns — from visual expression to digital experience.',
     view: 'View project',
     pending: 'Asset pending',
     scroll: 'Hover to scroll the full page',
@@ -39,6 +39,19 @@ const en = {
     description: 'Photography and digital design by Ona — GEMINISOBF.DEV — with a technical background in development and systems.',
     intro: { eyebrow: 'Introduction', complementary: 'Complementary disciplines' },
     services: { eyebrow: 'Services', title: 'What I offer.', offer: 'Includes', pending: 'Image pending' },
+    graphic: {
+      eyebrow: 'Graphic design',
+      title: 'Visual identity, composition and graphic communication.',
+      intro: 'Graphic design, visual identity and graphic communication projects, where creativity, composition, typography and the construction of an identity take the lead.',
+      pieces: 'pieces',
+      piece: 'piece',
+      view: 'View project',
+      pendingTitle: 'Project in preparation',
+      pendingBody: 'New graphic design work will be published here.',
+      close: 'Close',
+      prev: 'Previous image',
+      next: 'Next image',
+    },
     work: {
       eyebrow: 'Additional work',
       title: 'Projects by discipline.',
@@ -68,9 +81,8 @@ const en = {
     title: 'Behind the interface.',
     paragraphs: [
       'My name is Ona. I am a UX/UI designer with a background in graphic design and a growing interest in technology and digital development.',
-      'I enjoy exploring the relationship between aesthetics and functionality, transforming ideas into meaningful digital experiences.',
-      'My multidisciplinary background allows me to approach projects from both a creative and technical perspective.',
-      'I believe in thoughtful design, attention to detail and the potential of technology as a creative tool.',
+      'I enjoy exploring the relationship between aesthetics and functionality, transforming ideas into meaningful digital experiences. With a hybrid background spanning UX/UI design and software development (DAM), I approach every project from both a creative and technical perspective — always prioritizing thoughtful design and attention to detail.',
+      'That same visual curiosity follows me even when I’m not working on wireframes or lines of code: you might find me exploring new cafés, seeking inspiration in digital art, or behind a camera, capturing weddings, sports, or real estate. Do you have a project in mind, or would you like to chat about design and development? Let’s talk.',
     ],
     art: 'Art',
     artItems: ['Graphic design', 'Illustration', 'Visual thinking', 'Creativity'],
@@ -80,10 +92,10 @@ const en = {
     diagramLabel: 'Diagram: art on one side and technology on the other converge into ONA.',
   },
   disciplines: {
-    eyebrow: 'Disciplines',
+    eyebrow: 'Discipline',
     title: ['Creative thinking.', 'Technical precision.', 'Analytical intelligence.'],
     intro:
-      'One practice across three layers: the visual idea, the application that brings it to life and the system that runs it. Areas below describe direction and study, not finished expertise.',
+      'A single practice across three layers: the visual idea, the application that brings it to life, and the system that makes it function. These areas define my focus and training, rather than representing a fixed or limited scope of experience.',
     chain: ['Design', 'Development', 'Systems'],
     areas: 'Areas',
     status: {
@@ -93,8 +105,28 @@ const en = {
       interest: 'Area of interest',
     },
   },
-  experience: { eyebrow: 'Experience', title: 'Experience' },
-  education: { eyebrow: 'Education', title: 'Education', specialization: 'Specialization' },
+  creative: {
+    eyebrow: 'Creative Projects & Exploration',
+    title: 'Personal ideas developed without limits or a brief.',
+    intro:
+      'Beyond client work, I dedicate part of my time to creating personal projects where I can experiment with complete creative freedom. From interface concepts and digital art to small-scale interactive developments, these pieces reflect my curiosity, my attention to detail, and my view of technology as a medium for expression.',
+    pendingTitle: 'Project in preparation',
+    pendingBody: 'Description coming soon.',
+    pendingImage: 'Image pending',
+    open: 'Show description',
+    close: 'Hide description',
+  },
+  experience: {
+    eyebrow: 'Experience',
+    title: 'Experience',
+    intro: 'A journey of building digital products — from the initial visual concept to the final line of code.',
+  },
+  education: {
+    eyebrow: 'Education',
+    title: 'Education',
+    specialization: 'Specialization',
+    intro: 'My technical and creative evolution — constantly growing at the intersection of design and technology.',
+  },
   awards: { eyebrow: 'Recognition', title: 'Awards & Recognition' },
   events: {
     eyebrow: 'Events',
@@ -201,7 +233,7 @@ const es: Widen<Dictionary> = {
   work: {
     eyebrow: 'Proyectos',
     title: 'Proyectos seleccionados',
-    intro: 'Conceptos de diseño y rediseño web — de la expresión visual a la experiencia digital.',
+    intro: 'Conceptos de diseño gráfico y rediseño web, de la expresión visual a la experiencia digital.',
     view: 'Ver proyecto',
     pending: 'Material pendiente',
     scroll: 'Pasa el cursor para recorrer la página',
@@ -214,6 +246,19 @@ const es: Widen<Dictionary> = {
     description: 'Fotografía y diseño digital de Ona — GEMINISOBF.DEV — con formación técnica en desarrollo y sistemas.',
     intro: { eyebrow: 'Introducción', complementary: 'Disciplinas complementarias' },
     services: { eyebrow: 'Servicios', title: 'Lo que ofrezco.', offer: 'Incluye', pending: 'Imagen pendiente' },
+    graphic: {
+      eyebrow: 'Diseño gráfico',
+      title: 'Identidad visual, composición y comunicación gráfica.',
+      intro: 'Proyectos de diseño gráfico, identidad visual y comunicación gráfica, donde la creatividad, la composición, la tipografía y la construcción de una identidad visual tienen un papel protagonista.',
+      pieces: 'piezas',
+      piece: 'pieza',
+      view: 'Ver proyecto',
+      pendingTitle: 'Proyecto en preparación',
+      pendingBody: 'Aquí se publicarán nuevos trabajos de diseño gráfico.',
+      close: 'Cerrar',
+      prev: 'Imagen anterior',
+      next: 'Imagen siguiente',
+    },
     work: {
       eyebrow: 'Más trabajo',
       title: 'Proyectos por disciplina.',
@@ -243,9 +288,8 @@ const es: Widen<Dictionary> = {
     title: 'Detrás de la interfaz.',
     paragraphs: [
       'Me llamo Ona. Soy diseñadora UX/UI con formación en diseño gráfico y un interés creciente por la tecnología y el desarrollo digital.',
-      'Disfruto explorando la relación entre estética y funcionalidad, transformando ideas en experiencias digitales con sentido.',
-      'Mi perfil multidisciplinar me permite abordar los proyectos desde una perspectiva tanto creativa como técnica.',
-      'Creo en el diseño reflexivo, la atención al detalle y el potencial de la tecnología como herramienta creativa.',
+      'Disfruto explorando la relación entre estética y funcionalidad, transformando ideas en experiencias digitales con sentido. Gracias a mi perfil híbrido entre el diseño UX/UI y el desarrollo (DAM), abordo cada proyecto desde una doble perspectiva, creativa y técnica, creyendo siempre en el diseño reflexivo y la atención al detalle.',
+      'Esa misma curiosidad visual me acompaña cuando no estoy entre wireframes o líneas de código: me encontrarás explorando nuevas cafeterías, buscando inspiración en el arte digital o detrás de una cámara haciendo fotografía de bodas, deportes e inmobiliaria. ¿Tienes un proyecto en mente o quieres charlar sobre diseño y desarrollo? Hablemos.',
     ],
     art: 'Arte',
     artItems: ['Diseño gráfico', 'Ilustración', 'Pensamiento visual', 'Creatividad'],
@@ -255,7 +299,7 @@ const es: Widen<Dictionary> = {
     diagramLabel: 'Diagrama: el arte a un lado y la tecnología al otro convergen en ONA.',
   },
   disciplines: {
-    eyebrow: 'Disciplinas',
+    eyebrow: 'Disciplina',
     title: ['Pensamiento creativo.', 'Precisión técnica.', 'Inteligencia analítica.'],
     intro:
       'Una sola práctica en tres capas: la idea visual, la aplicación que le da vida y el sistema que la hace funcionar. Las áreas describen dirección y formación, no experiencia cerrada.',
@@ -268,8 +312,28 @@ const es: Widen<Dictionary> = {
       interest: 'Área de interés',
     },
   },
-  experience: { eyebrow: 'Experiencia', title: 'Experiencia' },
-  education: { eyebrow: 'Formación', title: 'Formación', specialization: 'Especialización' },
+  creative: {
+    eyebrow: 'Proyectos creativos & exploración',
+    title: 'Ideas propias desarrolladas sin límites ni briefing.',
+    intro:
+      'Más allá del trabajo para clientes, dedico parte de mi tiempo a crear proyectos personales donde puedo experimentar con total libertad creativa. Desde conceptos de interfaz y arte digital hasta pequeños desarrollos interactivos, estas piezas reflejan mi curiosidad, mi atención al detalle y mi forma de entender la tecnología como medio expresivo.',
+    pendingTitle: 'Proyecto en preparación',
+    pendingBody: 'Descripción próximamente.',
+    pendingImage: 'Imagen pendiente',
+    open: 'Mostrar descripción',
+    close: 'Ocultar descripción',
+  },
+  experience: {
+    eyebrow: 'Experiencia',
+    title: 'Experiencia',
+    intro: 'Un recorrido construyendo productos digitales desde la primera idea visual hasta la última línea de código.',
+  },
+  education: {
+    eyebrow: 'Formación',
+    title: 'Formación',
+    specialization: 'Especialización',
+    intro: 'Mi evolución técnica y creativa, en constante crecimiento entre el diseño y la tecnología.',
+  },
   awards: { eyebrow: 'Reconocimientos', title: 'Premios y reconocimientos' },
   events: {
     eyebrow: 'Eventos',
